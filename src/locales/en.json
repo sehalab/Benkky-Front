@@ -1,0 +1,297 @@
+{
+  "app": {
+    "name": "Benkky",
+    "slogan": "Your Innovative Fintech Partner",
+    "tagline": "The Future of Finance, Today",
+    "description": "Benkky is a cutting-edge Fintech platform revolutionizing the financial experience through innovative, secure, and accessible digital solutions.",
+    "welcome": "Welcome to Benkky"
+  },
+  "header": {
+    "open_hours": "Open Hours of City Govt. (Mon - Fri: {start} - {end})",
+    "location": "684 West College St. Sun City, USA",
+    "phone": "Phone:",
+    "get_quote": "Get an Quote",
+    "search": "Search"
+  },
+  "navigation": {
+    "home": "Home",
+    "pages": "Pages",
+    "about": "About",
+    "sign_in": "Sign In",
+    "sign_up": "Sign Up",
+    "faq": "FAQ",
+    "pricing": "Pricing",
+    "team": "Team",
+    "team_list": "Team List",
+    "team_details": "Team Details",
+    "shop": "Shop",
+    "products": "Products",
+    "products_sidebar": "Products with Sidebar",
+    "product_details": "Product Details",
+    "cart": "Cart",
+    "checkout": "Checkout",
+    "testimonials": "Testimonials",
+    "error_404": "Error 404",
+    "services": "Services",
+    "services_list": "Services",
+    "service_details": "Service Details",
+    "portfolio": "Portfolio",
+    "portfolio_list": "Portfolio",
+    "portfolio_details": "Portfolio Details",
+    "news": "News",
+    "news_grid": "News Grid",
+    "news_details": "News Details",
+    "contact": "Contact"
+  },
+  "home": {
+    "hero": {
+      "title": "Revolutionize Your Financial Experience",
+      "subtitle": "Innovative Fintech solutions for simplified and secure financial management",
+      "cta_primary": "Open an Account",
+      "cta_secondary": "Discover Our Solutions"
+    },
+    "mission": {
+      "title": "Our Mission",
+      "content": "Democratize access to financial services by offering innovative, transparent, and accessible technological solutions for everyone.",
+      "vision": "Become the leader in digital transformation of the financial sector in Africa and worldwide."
+    },
+    "services": {
+      "title": "Our Fintech Solutions",
+      "subtitle": "Innovative financial services tailored to your needs",
+      "web_development": {
+        "title": "Fintech Development",
+        "description": "Digital banking platforms and custom financial applications"
+      },
+      "mobile_apps": {
+        "title": "Financial Apps",
+        "description": "Banking and financial management mobile applications"
+      },
+      "ui_ux": {
+        "title": "Finance UX Design",
+        "description": "Intuitive banking interfaces and secure user experiences"
+      },
+      "seo": {
+        "title": "Fintech Marketing",
+        "description": "Digital strategies for financial institutions"
+      },
+      "consulting": {
+        "title": "Fintech Consulting",
+        "description": "Strategic advice for your financial digital transformation"
+      },
+      "blockchain": {
+        "title": "Blockchain Solutions",
+        "description": "Secure cryptocurrency exchanges and blockchain-based services"
+      }
+    },
+    "about": {
+      "title": "About Benkky",
+      "subtitle": "A passionate team dedicated to your financial success",
+      "feature1": "Over 10 years of Fintech experience",
+      "feature2": "Team of certified finance specialists",
+      "feature3": "24/7 customer support",
+      "image_alt": "Our Fintech team at work"
+    },
+    "testimonials": {
+      "title": "What Our Clients Say",
+      "subtitle": "Discover testimonials from our satisfied clients"
+    },
+    "cta": {
+      "title": "Ready to Transform Your Financial Experience?",
+      "subtitle": "Join the Fintech revolution with Benkky",
+      "button": "Get Started Now"
+    },
+    "features": {
+      "title": "Why Choose Benkky?",
+      "security": {
+        "title": "Maximum Security",
+        "description": "Advanced encryption technologies and international security certifications"
+      },
+      "accessibility": {
+        "title": "Total Accessibility",
+        "description": "Services available 24/7 on all your preferred platforms"
+      },
+      "innovation": {
+        "title": "Continuous Innovation",
+        "description": "Ongoing research and development for cutting-edge solutions"
+      },
+      "support": {
+        "title": "Premium Support",
+        "description": "Dedicated customer support and expert financial advisors"
+      }
+    },
+    "statistics": {
+      "title": "Benkky in Numbers",
+      "clients": "Active clients",
+      "transactions": "Transactions processed",
+      "countries": "Countries served",
+      "satisfaction": "Satisfaction rate"
+    }
+  },
+  "buttons": {
+    "read_more": "Read More",
+    "view_all": "View All",
+    "get_started": "Get Started",
+    "contact_us": "Contact Us",
+    "send": "Send",
+    "subscribe": "Subscribe",
+    "learn_more": "Learn More",
+    "download": "Download",
+    "apply_now": "Apply Now",
+    "book_now": "Book Now"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Let's discuss your financial project",
+    "form": {
+      "name": "Your Name",
+      "email": "Your Email",
+      "phone": "Phone",
+      "subject": "Subject",
+      "message": "Your Message",
+      "submit": "Send Message"
+    }
+  },
+  "footer": {
+    "description": "Benkky - Innovative Fintech platform offering secure and accessible digital financial solutions.",
+    "quick_links": "Quick Links",
+    "services_menu": "Our Services",
+    "contact_info": "Contact",
+    "newsletter": "Fintech Newsletter",
+    "newsletter_text": "Subscribe to receive our latest financial innovations",
+    "subscribe": "Subscribe",
+    "copyright": "© {year} Benkky Technologies. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "rights": "Licensed electronic payment service"
+  },
+  "messages": {
+    "loading": "Loading...",
+    "success": "Success!",
+    "error": "Error",
+    "warning": "Warning",
+    "info": "Information",
+    "confirm": "Confirm",
+    "yes": "Yes",
+    "no": "No",
+    "no_data": "No data available"
+  },
+  "forms": {
+    "required": "This field is required",
+    "invalid_email": "Invalid email",
+    "min_length": "Minimum {length} characters",
+    "max_length": "Maximum {length} characters"
+  },
+  "auth": {
+    "login": {
+      "title": "Login",
+      "button": "Sign In",
+      "remember_me": "Remember me",
+      "forgot_password": "Forgot password?",
+      "with_google": "Google",
+      "with_facebook": "Facebook",
+      "no_account": "Don't have an account?",
+      "create_one": "Create one"
+    },
+    "register": {
+      "title": "Register",
+      "button": "Sign Up",
+      "terms_agreement": "I agree to the <a href='/terms'>Terms of Service</a> and <a href='/privacy'>Privacy Policy</a>",
+      "already_have_account": "Already have an account?",
+      "switch_to_login": "Sign In",
+      "success": "Registration successful! Welcome to Benkky"
+    },
+    "form": {
+      "full_name": "Full Name",
+      "name_placeholder": "Enter your full name",
+      "email": "Email Address",
+      "email_placeholder": "enter@your.email",
+      "phone": "Phone",
+      "phone_placeholder": "Your phone number",
+      "password": "Password",
+      "password_placeholder": "Your password",
+      "confirm_password": "Confirm Password",
+      "confirm_password_placeholder": "Re-enter your password"
+    },
+    "validation": {
+      "min_length": "8+ characters",
+      "uppercase": "1 uppercase",
+      "number": "1 number",
+      "special": "1 special char"
+    },
+    "loading": "Loading...",
+    "or": "OR",
+    "back_to_home": "Back to home",
+    "illustration_title": "Join the Fintech Revolution",
+    "illustration_text": "Manage your finances with simplicity and security with Benkky",
+    "illustration_alt": "Fintech Illustration"
+  },
+
+  "auth": {
+    "login": {
+        "title": "Login",
+        "button": "Sign In",
+        "welcome_back": "Welcome Back!",
+        "subtitle": "Access your account to manage your finances",
+        "remember_me": "Remember me",
+        "forgot_password": "Forgot password?",
+        "with_google": "Continue with Google",
+        "with_facebook": "Continue with Facebook"
+    },
+    "register": {
+        "title": "Register",
+        "button": "Get Started",
+        "join_us": "Join Us!",
+        "subtitle": "Create your account in seconds",
+        "terms_agreement": "I agree to the <a href='/terms' class='terms-link'>Terms of Service</a> and <a href='/privacy' class='terms-link'>Privacy Policy</a>",
+        "already_have_account": "Already a member?",
+        "switch_to_login": "Sign In"
+    },
+    "form": {
+        "full_name": "Full Name",
+        "name_placeholder": "John Doe",
+        "email": "Email Address",
+        "email_placeholder": "Your email address",
+        "phone": "Phone",
+        "phone_placeholder": "+1 234 567 8900",
+        "password": "Password",
+        "password_placeholder": "••••••••",
+        "confirm_password": "Confirm Password",
+        "confirm_password_placeholder": "••••••••"
+    },
+    "features": {
+        "security": "Bank-grade Security",
+        "security_desc": "256-bit encryption and two-factor authentication",
+        "speed": "Instant Transactions",
+        "speed_desc": "Real-time transfers and payments",
+        "global": "Global Service",
+        "global_desc": "Available in 50+ countries"
+    },
+    "testimonial": {
+        "quote": "Benkky revolutionized how we manage our company finances.",
+        "name": "Alexandre Martin",
+        "position": "CEO, FinanceCorp"
+    },
+    "security_note": "Your data is securely encrypted",
+    "or": "or",
+    "back_to_home": "Back to Home"
+},
+"stats": {
+        "clients": "Clients",
+        "volume": "Volume Processed",
+        "uptime": "Uptime"
+    },
+    "features": {
+
+        "support": {
+            "title": "24/7 Support",
+            "desc": "Dedicated assistance available anytime"
+        }
+    },
+    "premium": "Premium",
+    "success": "Success",
+    "error": "Error",
+    "security": {
+        "title": "Maximum Security",
+        "desc": "ISO 27001 & PCI DSS Certified"
+    }
+}

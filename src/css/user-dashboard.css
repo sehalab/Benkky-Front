@@ -1,0 +1,221 @@
+/* Dashboard Variables */
+:root {
+    /* Dark Fintech Colors */
+    --dark-color1: #063232;
+    --dark-color2: #0F2727;
+    --dark-color3: #061419;
+    --dark-color4: #1A4137;
+
+    --accent-color1: #2A8C82;
+    --accent-color2: #4CAF93;
+    --accent-color3: #6BC4A6;
+    --light-color1: #E8F4F2;
+    --light-color2: #C2E0D8;
+
+    /* Gradients */
+    --gradient-dark: linear-gradient(135deg, var(--dark-color1) 0%, var(--dark-color3) 100%);
+    --gradient-accent: linear-gradient(135deg, var(--accent-color1) 0%, var(--accent-color3) 100%);
+    --gradient-green: linear-gradient(135deg, var(--dark-color4) 0%, var(--accent-color2) 100%);
+
+    /* Glassmorphism */
+    --glass-dark: rgba(6, 50, 50, 0.7);
+    --glass-light: rgba(26, 65, 55, 0.3);
+    --glass-border: rgba(106, 196, 166, 0.2);
+
+    /* Shadows */
+    --shadow-dark: 0 20px 40px rgba(0, 0, 0, 0.4);
+    --shadow-accent: 0 10px 30px rgba(42, 140, 130, 0.3);
+    --shadow-glow: 0 0 30px rgba(106, 196, 166, 0.5);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(15, 39, 39, 0.3);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent-color2);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color1);
+}
+
+/* Dashboard Base Styles */
+.user-dashboard {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--light-color1);
+}
+
+/* Card Base Styles */
+.dark-card {
+    background: rgba(15, 39, 39, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.dark-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color2);
+    box-shadow: var(--shadow-accent);
+}
+
+/* Button Base Styles */
+.dark-btn {
+    background: linear-gradient(135deg, var(--dark-color4) 0%, var(--accent-color2) 100%);
+    border: none;
+    border-radius: 14px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.dark-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(42, 140, 130, 0.3);
+}
+
+.dark-btn:active {
+    transform: translateY(-1px);
+}
+
+/* Input Base Styles */
+.dark-input {
+    background: rgba(15, 39, 39, 0.6);
+    border: 2px solid rgba(106, 196, 166, 0.2);
+    border-radius: 14px;
+    color: var(--light-color1);
+    padding: 16px 20px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.dark-input:focus {
+    border-color: var(--accent-color2);
+    background: rgba(6, 20, 25, 0.8);
+    box-shadow: 0 0 0 4px rgba(42, 140, 130, 0.1);
+    outline: none;
+}
+
+.dark-input::placeholder {
+    color: rgba(194, 224, 216, 0.5);
+}
+
+/* Animations */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Utility Classes */
+.text-gradient {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.bg-gradient-dark {
+    background: var(--gradient-dark);
+}
+
+.bg-gradient-accent {
+    background: var(--gradient-accent);
+}
+
+.glass-effect {
+    background: rgba(15, 39, 39, 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(106, 196, 166, 0.2);
+}
+
+/* Status Colors */
+.status-active {
+    color: #4CAF50;
+    background: rgba(76, 175, 80, 0.1);
+}
+
+.status-pending {
+    color: #FF9800;
+    background: rgba(255, 152, 0, 0.1);
+}
+
+.status-blocked {
+    color: #F44336;
+    background: rgba(244, 67, 54, 0.1);
+}
+
+.status-expired {
+    color: #9E9E9E;
+    background: rgba(158, 158, 158, 0.1);
+}
+
+/* Loading States */
+.skeleton {
+    background: linear-gradient(90deg,
+        rgba(15, 39, 39, 0.6) 0%,
+        rgba(26, 65, 55, 0.8) 50%,
+        rgba(15, 39, 39, 0.6) 100%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* Responsive Utilities */
+@media (max-width: 768px) {
+    .mobile-hidden {
+        display: none !important;
+    }
+
+    .mobile-full-width {
+        width: 100% !important;
+    }
+
+    .mobile-stack {
+        flex-direction: column !important;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+
+    .user-dashboard {
+        background: white !important;
+        color: black !important;
+    }
+}
