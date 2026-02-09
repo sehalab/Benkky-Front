@@ -2,40 +2,44 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import { useAppStore } from '@/stores/app'
 
-// Layouts
-import MainLayout from '@/components/layouts/MainLayout.vue'
-import AdminLayout from '@/components/layouts/AdminLayout.vue'
+import MainLayout from '@/layouts/guest/MainLayout.vue'
+import AdminLayout from '@/layouts/admin/AdminLayout.vue'
 
-// Pages publiques
-const HomeView = () => import('@/views/HomeView.vue')
-const NotFoundView = () => import('@/views/NotFoundView.vue')
+const HomeView = () => import('@/pages/Home.vue')
+const NotFoundView = () => import('@/pages/NotFound.vue')
 
-// Auth pages
-const AuthView = () => import('@/views/auth/AuthView.vue')
-const LoginView = () => import('@/views/auth/LoginView.vue')
-const RegisterView = () => import('@/views/auth/RegisterView.vue')
-const PasswordResetView = () => import('@/views/auth/PasswordResetView.vue')
+const AuthView = () => import('@/pages/auth/AuthPage.vue')
 
-// Dashboard pages
-const DashboardView = () => import('@/views/dashboard/DashboardView.vue')
-const WalletView = () => import('@/views/dashboard/WalletView.vue')
-const CreditCardsView = () => import('@/views/dashboard/CreditCardsView.vue')
-const ESimsView = () => import('@/views/dashboard/ESimsView.vue')
-const MoneyTransferView = () => import('@/views/dashboard/MoneyTransferView.vue')
-const CommunicationView = () => import('@/views/dashboard/CommunicationView.vue')
-const TransactionsView = () => import('@/views/dashboard/TransactionsView.vue')
-const SettingsView = () => import('@/views/dashboard/SettingsView.vue')
+const DashboardView = () => import('@/pages/dashboard/Dashboard.vue')
+const WalletView = () => import('@/pages/dashboard/Wallet.vue')
+const CreditCardsView = () => import('@/pages/dashboard/CreditCards.vue')
+const ESimsView = () => import('@/pages/dashboard/ESims.vue')
+const MoneyTransferView = () => import('@/pages/dashboard/MoneyTransfer.vue')
+const CommunicationView = () => import('@/pages/dashboard/Communication.vue')
+const TransactionsView = () => import('@/pages/dashboard/Transactions.vue')
+const SettingsView = () => import('@/pages/dashboard/Settings.vue')
 
 const routes = [
-  // Route racine (page d'accueil)
   {
     path: '/',
-    name: 'home',
-    component: HomeView,
-    meta: { title: 'Accueil' }
+    component: MainLayout,
+    children: [
+      {
+        path: '',
+        name: 'home',
+        component: HomeView,
+        meta: {
+          title: 'Accueil',
+          layoutProps: {
+            hideHeader: false,
+            hideFooter: false,
+            hidePreloader: false,
+            showLanguageSwitcher: true,
+          },
+        },
+      },
+    ],
   },
-
-  // Routes d'authentification
   {
     path: '/auth',
     component: MainLayout,
@@ -48,8 +52,13 @@ const routes = [
         meta: {
           title: 'Connexion',
           guest: true,
-          layoutProps: { hideHeader: true, hideFooter: true }
-        }
+          layoutProps: {
+            hideHeader: true, // IMPORTANT: true pour cacher
+            hideFooter: true, // IMPORTANT: true pour cacher
+            hidePreloader: true, // IMPORTANT: true pour cacher
+            showLanguageSwitcher: false,
+          },
+        },
       },
       {
         path: 'register',
@@ -59,8 +68,13 @@ const routes = [
         meta: {
           title: 'Inscription',
           guest: true,
-          layoutProps: { hideHeader: true, hideFooter: true }
-        }
+          layoutProps: {
+            hideHeader: true, // IMPORTANT: true pour cacher
+            hideFooter: true, // IMPORTANT: true pour cacher
+            hidePreloader: true, // IMPORTANT: true pour cacher
+            showLanguageSwitcher: false,
+          },
+        },
       },
       {
         path: 'password/reset',
@@ -70,10 +84,15 @@ const routes = [
         meta: {
           title: 'Réinitialisation du mot de passe',
           guest: true,
-          layoutProps: { hideHeader: true, hideFooter: true }
-        }
-      }
-    ]
+          layoutProps: {
+            hideHeader: true,
+            hideFooter: true,
+            hidePreloader: true,
+            showLanguageSwitcher: false,
+          },
+        },
+      },
+    ],
   },
 
   // Dashboard (zone protégée)
@@ -83,67 +102,66 @@ const routes = [
     component: AdminLayout,
     meta: {
       title: 'Tableau de bord',
-      requiresAuth: true
+      requiresAuth: true,
     },
     children: [
       {
         path: '',
         name: 'dashboard.home',
         component: DashboardView,
-        meta: { title: 'Tableau de bord' }
+        meta: { title: 'Tableau de bord' },
       },
       {
         path: 'wallet',
         name: 'dashboard.wallet',
         component: WalletView,
-        meta: { title: 'Mon Portefeuille' }
+        meta: { title: 'Mon Portefeuille' },
       },
       {
         path: 'cards',
         name: 'dashboard.cards',
         component: CreditCardsView,
-        meta: { title: 'Cartes de Crédit' }
+        meta: { title: 'Cartes de Crédit' },
       },
       {
         path: 'esims',
         name: 'dashboard.esims',
         component: ESimsView,
-        meta: { title: 'eSIMs' }
+        meta: { title: 'eSIMs' },
       },
       {
         path: 'transfer',
         name: 'dashboard.transfer',
         component: MoneyTransferView,
-        meta: { title: 'Envoyer de l\'argent' }
+        meta: { title: "Envoyer de l'argent" },
       },
       {
         path: 'communication',
         name: 'dashboard.communication',
         component: CommunicationView,
-        meta: { title: 'Communications' }
+        meta: { title: 'Communications' },
       },
       {
         path: 'transactions',
         name: 'dashboard.transactions',
         component: TransactionsView,
-        meta: { title: 'Historique' }
+        meta: { title: 'Historique' },
       },
       {
         path: 'settings',
         name: 'dashboard.settings',
         component: SettingsView,
-        meta: { title: 'Paramètres' }
-      }
-    ]
+        meta: { title: 'Paramètres' },
+      },
+    ],
   },
 
-  // 404 - Doit être la dernière route
   {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
     component: NotFoundView,
-    meta: { title: 'Page non trouvée' }
-  }
+    meta: { title: 'Page non trouvée' },
+  },
 ]
 
 const router = createRouter({
@@ -158,17 +176,15 @@ const router = createRouter({
   }
 })
 
-// Middleware de navigation
+
 router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore()
   const appStore = useAppStore()
 
-  // Mettre à jour le titre de la page
   if (to.meta.title) {
     document.title = `${to.meta.title} - Benkky`
   }
 
-  // Vérifier l'authentification
   const isAuthenticated = authStore.isAuthenticated
 
   if (to.meta.requiresAuth) {

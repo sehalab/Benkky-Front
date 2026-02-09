@@ -14,12 +14,12 @@
             <!-- Main Container -->
             <div class="admin-container">
                 <!-- Admin Sidebar -->
-                <AdminSidebar :user="userSafe" />
+                <Sidebar :user="userSafe" />
 
                 <!-- Main Content -->
                 <div class="main-content">
                     <!-- Admin Header -->
-                    <AdminHeader :user="userSafe" />
+                    <Header :user="userSafe" />
 
                     <!-- Content Area -->
                     <div class="content-area">
@@ -34,8 +34,9 @@
 
 <script setup>
 import { computed } from 'vue';
-import AdminSidebar from '@/layouts/Sidebar.vue';
-import AdminHeader from '@/layouts/Header.vue';
+import Sidebar from './Sidebar.vue';
+import Header from './Header.vue';
+
 
 const props = defineProps({
     user: {

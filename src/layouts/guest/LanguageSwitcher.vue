@@ -14,7 +14,7 @@
 
 <script setup>
 import { computed } from 'vue';
-import { useI18n } from '@/i18n';
+import { useI18n } from 'vue-i18n';
 
 const { locale } = useI18n();
 
@@ -26,7 +26,6 @@ const switchLanguage = (newLocale) => {
   localStorage.setItem('locale', newLocale);
   document.documentElement.lang = newLocale;
 
-  // Émettre un événement pour informer les autres composants
   window.dispatchEvent(new CustomEvent('language-changed', { detail: newLocale }));
 };
 

@@ -11,6 +11,8 @@ import skipFormatting from 'eslint-config-prettier/flat'
 // configureVueProject({ scriptLangs: ['ts', 'tsx'] })
 // More info at https://github.com/vuejs/eslint-config-typescript/#advanced-setup
 
+configureVueProject({ scriptLangs: ['ts', 'tsx', 'js'] })
+
 export default defineConfigWithVueTs(
   {
     name: 'app/files-to-lint',

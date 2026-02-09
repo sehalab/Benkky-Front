@@ -25,7 +25,6 @@
 
 <script setup>
 import { ref, watch } from 'vue';
-import { router } from '@inertiajs/vue3';
 
 const props = defineProps({
     isOpen: Boolean

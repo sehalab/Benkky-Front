@@ -27,7 +27,6 @@
 </template>
 
 <script setup>
-import { Link } from '@inertiajs/vue3';
 import { computed } from 'vue';
 import { ref, onMounted } from 'vue';
 

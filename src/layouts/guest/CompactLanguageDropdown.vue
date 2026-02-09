@@ -33,7 +33,7 @@
 
 <script setup>
 import { ref, computed } from 'vue';
-import { useI18n } from '@/i18n';
+import { useI18n } from 'vue-i18n';
 
 const { locale } = useI18n();
 const showDialog = ref(false);

@@ -74,7 +74,7 @@
             <!-- Features Showcase -->
             <div class="features-showcase">
                 <div class="showcase-track" :style="{ transform: `translateX(-${showcaseOffset}px)` }">
-                    <div class="showcase-item" v-for="(feature, index) in allFeatures" :key="feature.id">
+                    <div class="showcase-item" v-for="feature in allFeatures" :key="feature.id">
                         <div class="showcase-icon" :class="feature.color">
                             <i :class="feature.icon"></i>
                         </div>

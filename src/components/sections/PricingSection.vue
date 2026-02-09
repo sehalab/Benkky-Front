@@ -261,7 +261,6 @@
 </template>
 
 <script setup>
-import { Link } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
 const activeTab = ref('streaming-advantages');

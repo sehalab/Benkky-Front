@@ -1,7 +1,6 @@
 <template>
     <section class="services-platform-section">
         <div class="container">
-            <!-- Formes décoratives -->
             <div class="decorative-shapes">
                 <div class="shape shape-1"></div>
                 <div class="shape shape-2"></div>
@@ -9,7 +8,6 @@
                 <div class="shape shape-4"></div>
             </div>
 
-            <!-- Titre principal -->
             <div class="section-header wow fadeInUp">
                 <h6 class="section-subtitle">Solutions Financières</h6>
                 <h2 class="section-title">
@@ -22,9 +20,7 @@
                 </p>
             </div>
 
-            <!-- Grid des services -->
             <div class="services-grid">
-                <!-- Carte 1 : Cartes Virtuelles -->
                 <div class="service-card wow fadeInUp" data-wow-delay="0.1s">
                     <div class="card-icon">
                         <div class="icon-wrapper">
@@ -54,7 +50,6 @@
                     </div>
                 </div>
 
-                <!-- Carte 2 : eSIM & Recharges -->
                 <div class="service-card wow fadeInUp" data-wow-delay="0.2s">
                     <div class="card-icon">
                         <div class="icon-wrapper">
@@ -85,7 +80,6 @@
                     </div>
                 </div>
 
-                <!-- Carte 3 : Transferts & Paiements -->
                 <div class="service-card wow fadeInUp" data-wow-delay="0.3s">
                     <div class="card-icon">
                         <div class="icon-wrapper">
@@ -116,7 +110,6 @@
                     </div>
                 </div>
 
-                <!-- Carte 4 : Paiement & Encaissement -->
                 <div class="service-card wow fadeInUp" data-wow-delay="0.4s">
                     <div class="card-icon">
                         <div class="icon-wrapper">
@@ -174,8 +167,7 @@
     </section>
 </template>
 
-<script setup>
-import { Link } from '@inertiajs/vue3';
+<script lang="js" setup>
 </script>
 
 <style scoped>

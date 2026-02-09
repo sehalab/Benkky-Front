@@ -3,7 +3,7 @@
         <!-- Admin Logo -->
         <div class="sidebar-logo">
             <div class="logo-wrapper">
-                <img src="/images/admin-logo.png" alt="Admin Panel" class="logo-img">
+                <img src="" alt="Admin Panel" class="logo-img">
                 <div class="logo-glow"></div>
             </div>
             <div class="logo-text">

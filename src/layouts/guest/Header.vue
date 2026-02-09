@@ -1,500 +1,485 @@
 <template>
-    <!-- Menu fixe qui apparaît au scroll -->
-    <header class="fixed-header" :class="{ 'visible': isScrolled }">
-        <div class="fixed-header-content">
-            <!-- Logo -->
-            <div class="fixed-logo">
-                <Link href="/">
-                    <img src="/images/logo_benkky.png" alt="Consultez" title="Consultez">
-                </Link>
-            </div>
+  <!-- Menu fixe qui apparaît au scroll -->
+  <header class="fixed-header" :class="{ 'visible': isScrolled }">
+    <div class="fixed-header-content">
+      <!-- Logo -->
+      <div class="fixed-logo">
+        <router-link to="/">
+          <img src="/images/logo_benkky.png" alt="Consultez" title="Consultez">
+        </router-link>
+      </div>
 
-            <!-- Navigation fixe -->
-            <nav class="fixed-navigation">
-                <ul class="fixed-nav-list">
-                    <li><Link href="/">{{ $t('navigation.home') }}</Link></li>
-                    <li class="dropdown">
-                        <a href="#">Pages <i class="fa-solid fa-chevron-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><Link href="/about">{{ $t('navigation.about') }}</Link></li>
-                            <li><Link href="/faq">Faq</Link></li>
-                            <li><Link href="/team">Team</Link></li>
-                        </ul>
-                    </li>
-                    <li><Link href="/services">Services</Link></li>
-                    <li><Link href="/portfolio">Portfolio</Link></li>
-                    <li><Link href="/news-grid">News</Link></li>
-                    <li><Link href="/contact">Contact</Link></li>
-                </ul>
-            </nav>
+      <!-- Navigation fixe -->
+      <nav class="fixed-navigation">
+        <ul class="fixed-nav-list">
+          <li><router-link to="/">{{ $t('navigation.home') }}</router-link></li>
+          <li class="dropdown">
+            <a href="#">Pages <i class="fa-solid fa-chevron-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><router-link to="/about">{{ $t('navigation.about') }}</router-link></li>
+              <li><router-link to="/faq">Faq</router-link></li>
+              <li><router-link to="/team">Team</router-link></li>
+            </ul>
+          </li>
+          <li><router-link to="/services">Services</router-link></li>
+          <li><router-link to="/portfolio">Portfolio</router-link></li>
+          <li><router-link to="/news-grid">News</router-link></li>
+          <li><router-link to="/contact">Contact</router-link></li>
+        </ul>
+      </nav>
 
-            <!-- Boutons d'action fixes -->
-            <div class="fixed-actions">
-                <div class="fixed-phone">
-                    <i class="fa-solid fa-phone"></i>
-                    <a href="tel:+243979515256">+243 979 515 256</a>
-                </div>
-
-                <!-- MODIFIÉ ICI : Condition pour l'état connecté/déconnecté -->
-                <div v-if="isAuthenticated" class="user-profile-menu">
-                    <Link class="fixed-btn-profile" :href="`/dashboard`">
-                        <div class="user-avatar-small">
-                            <img
-                                v-if="user?.avatar_url"
-                                :src="user.avatar_url"
-                                :alt="user.first_name"
-                                @error="handleAvatarError"
-                            />
-                            <i v-else class="fa-regular fa-user"></i>
-                        </div>
-                        <span class="user-name">
-                            {{ displayName }}
-                        </span>
-                        <i class="fa-solid fa-chevron-down dropdown-icon"></i>
-                    </Link>
-
-                    <!-- Menu déroulant utilisateur -->
-                    <div class="user-dropdown-menu">
-                        <Link href="/dashboard">
-                            <i class="fa-solid fa-gauge"></i>
-                            {{ $t('navigation.dashboard') }}
-                        </Link>
-                        <Link href="/profile">
-                            <i class="fa-regular fa-user"></i>
-                            {{ $t('navigation.profile') }}
-                        </Link>
-                        <Link href="/settings">
-                            <i class="fa-solid fa-gear"></i>
-                            {{ $t('navigation.settings') }}
-                        </Link>
-                        <div class="dropdown-divider"></div>
-                        <button @click="logout" class="logout-btn">
-                            <i class="fa-solid fa-right-from-bracket"></i>
-                            {{ $t('navigation.logout') }}
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Bouton d'inscription quand non connecté -->
-                <Link v-else class="fixed-btn-inscription" href="/auth/login">
-                    {{ $t('navigation.sign_in') }}
-                        | {{ $t('navigation.sign_up') }} <i class="fa-regular fa-angle-right"></i>
-                </Link>
-            </div>
-        </div>
-    </header>
-
-    <!-- Menu principal original -->
-    <header class="main-header header-style-three">
-        <!-- Header Top -->
-        <div class="header-top">
-            <div class="auto-container">
-                <div class="top-left">
-                    <ul class="info-list">
-                        <li>
-                            <span class="fa-regular fa-clock"></span>
-                            {{ $t('navigation.open_hours') }}:
-                            <span>{{ $t('navigation.hours_range') }}</span>
-                        </li>
-                    </ul>
-                    <ul class="info-list">
-                        <!-- Sélecteur de langue -->
-                        <li class="language-selector-item">
-                            <i class="fa-solid fa-globe"></i>
-                            <CompactLanguageDropdown />
-                        </li>
-                        <li><i class="fa-solid fa-location-dot"></i>{{ $t('navigation.address') }}</li>
-                    </ul>
-                </div>
-
-                <div class="top-right">
-                    <ul class="top-social-icon">
-                        <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                        <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                        <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                    </ul>
-                </div>
-            </div>
+      <!-- Boutons d'action fixes -->
+      <div class="fixed-actions">
+        <div class="fixed-phone">
+          <i class="fa-solid fa-phone"></i>
+          <a href="tel:+243979515256">+243 979 515 256</a>
         </div>
 
-        <!-- Main box -->
-        <div class="main-box">
-            <div class="logo-box">
-                <div class="logo">
-                    <Link href="/">
-                        <img src="/images/logo_benkky.png" alt="Consultez" title="Consultez">
-                    </Link>
-                </div>
+        <!-- MODIFIÉ ICI : Condition pour l'état connecté/déconnecté -->
+        <div v-if="isAuthenticated" class="user-profile-menu">
+          <router-link class="fixed-btn-profile" to="/dashboard">
+            <div class="user-avatar-small">
+              <img v-if="user?.avatar_url" :src="user.avatar_url" :alt="user.first_name" @error="handleAvatarError" />
+              <i v-else class="fa-regular fa-user"></i>
             </div>
+            <span class="user-name">
+              {{ displayName }}
+            </span>
+            <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+          </router-link>
 
-            <!-- Nav Box -->
-            <div class="nav-outer">
-                <nav class="nav main-menu">
-                    <ul class="navigation">
-                        <li class="dropdown">
-                            <Link href="/">{{ $t('navigation.home') }}</Link>
-                        </li>
-
-                        <li class="dropdown">
-                            <a href="#">Pages</a>
-                            <ul>
-                                <li><Link href="/about">{{ $t('navigation.about') }}</Link></li>
-                                <li><Link href="/faq">Faq</Link></li>
-                                <li><Link href="/pricing">Pricing</Link></li>
-                                <li class="dropdown">
-                                    <a href="#">{{ $t('navigation.team') }}</a>
-                                    <ul>
-                                        <li><Link href="/team">Team List</Link></li>
-                                        <li><Link href="/team-details">Team Details</Link></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#">Shop</a>
-                                    <ul>
-                                        <li><Link href="/shop">Products</Link></li>
-                                        <li><Link href="/shop-sidebar">Products with Sidebar</Link></li>
-                                        <li><Link href="/product-details">Product Details</Link></li>
-                                        <li><Link href="/cart">Cart</Link></li>
-                                        <li><Link href="/checkout">Checkout</Link></li>
-                                    </ul>
-                                </li>
-                                <li><Link href="/testimonials">Testimonials</Link></li>
-                                <li><Link href="/404">404</Link></li>
-                            </ul>
-                        </li>
-
-                        <li class="dropdown">
-                            <a href="#">Services</a>
-                            <ul>
-                                <li><Link href="/services">Services</Link></li>
-                                <li><Link href="/service-details">Services Details</Link></li>
-                            </ul>
-                        </li>
-
-                        <li class="dropdown">
-                            <a href="#">Portfolio</a>
-                            <ul>
-                                <li><Link href="/portfolio">Portfolio</Link></li>
-                                <li><Link href="/portfolio-details">Portfolio Details</Link></li>
-                            </ul>
-                        </li>
-
-                        <li class="dropdown">
-                            <a href="#">News</a>
-                            <ul>
-                                <li><Link href="/news-grid">News Grid</Link></li>
-                                <li><Link href="/news-details">News Details</Link></li>
-                            </ul>
-                        </li>
-
-                        <li><Link href="/contact">Contact</Link></li>
-                    </ul>
-                </nav>
-            </div>
-
-            <div class="outer-box">
-                <div class="info-box">
-                    <div class="call-info">
-                        <i class="fa-solid fa-phone ring__animation"></i>
-                        <div>
-                            <h6 class="title">Phone:</h6>
-                            <a href="tel:00190000000">+243 979515256</a>
-                        </div>
-                    </div>
-
-                    <!-- MODIFIÉ ICI AUSSI pour le menu principal -->
-                    <div class="separator"></div>
-
-                    <div v-if="isAuthenticated" class="user-profile-main">
-                        <div class="user-profile-toggle">
-                            <div class="user-avatar-main">
-                                <img
-                                    v-if="user?.avatar_url"
-                                    :src="user.avatar_url"
-                                    :alt="user.first_name"
-                                    @error="handleAvatarError"
-                                />
-                                <div v-else class="avatar-initial">
-                                    {{ getUserInitial }}
-                                </div>
-                            </div>
-                            <span class="user-greeting">
-                                {{ displayName }}
-                            </span>
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </div>
-
-                        <div class="user-dropdown-main">
-                            <Link href="/dashboard">
-                                <i class="fa-solid fa-gauge"></i>
-                                {{ $t('navigation.dashboard') }}
-                            </Link>
-                            <Link href="/wallet">
-                                <i class="fa-solid fa-wallet"></i>
-                                {{ $t('navigation.wallet') }}
-                            </Link>
-                            <Link href="/cards">
-                                <i class="fa-regular fa-credit-card"></i>
-                                {{ $t('navigation.cards') }}
-                            </Link>
-                            <Link href="/transactions">
-                                <i class="fa-solid fa-exchange-alt"></i>
-                                {{ $t('navigation.transactions') }}
-                            </Link>
-                            <div class="dropdown-divider"></div>
-                            <Link href="/profile">
-                                <i class="fa-regular fa-user"></i>
-                                {{ $t('navigation.profile') }}
-                            </Link>
-                            <Link href="/settings">
-                                <i class="fa-solid fa-gear"></i>
-                                {{ $t('navigation.settings') }}
-                            </Link>
-                            <div class="dropdown-divider"></div>
-                            <button @click="logout" class="logout-btn-main">
-                                <i class="fa-solid fa-right-from-bracket"></i>
-                                {{ $t('navigation.logout') }}
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Bouton d'inscription quand non connecté -->
-                    <Link v-else class="btn-inscription" href="/auth/login">
-                        {{ $t('navigation.sign_in') }}
-                        | {{ $t('navigation.sign_up') }} <i class="fa-regular fa-angle-right"></i>
-                    </Link>
-                </div>
-
-                <div class="mobile-nav-toggler d-block d-lg-none text-white">
-                    <div class="custom-burger-icon">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </div>
-            </div>
+          <!-- Menu déroulant utilisateur -->
+          <div class="user-dropdown-menu">
+            <router-link to="/dashboard">
+              <i class="fa-solid fa-gauge"></i>
+              {{ $t('navigation.dashboard') }}
+            </router-link>
+            <router-link to="/profile">
+              <i class="fa-regular fa-user"></i>
+              {{ $t('navigation.profile') }}
+            </router-link>
+            <router-link to="/settings">
+              <i class="fa-solid fa-gear"></i>
+              {{ $t('navigation.settings') }}
+            </router-link>
+            <div class="dropdown-divider"></div>
+            <button @click="logout" class="logout-btn">
+              <i class="fa-solid fa-right-from-bracket"></i>
+              {{ $t('navigation.logout') }}
+            </button>
+          </div>
         </div>
 
-        <!-- Mobile Menu -->
-        <MobileMenu />
-
-        <!-- Header Search -->
-        <HeaderSearch />
-
-        <!-- Sticky Header -->
-        <StickyHeader />
-    </header>
-
-    <!-- NOUVEAU : Menu Dropdown Mobile -->
-    <div class="mobile-dropdown-menu" :class="{ 'open': isMobileMenuOpen, 'scrolled': isMobileScrolled }">
-        <!-- Overlay pour fermer le menu -->
-        <div class="mobile-menu-overlay" @click="closeMobileMenu"></div>
-
-        <!-- Contenu du menu mobile -->
-        <div class="mobile-menu-content">
-            <!-- Header du menu mobile AVEC FIXED -->
-            <div class="mobile-menu-header fixed-mobile-header">
-                <div class="mobile-logo">
-                    <Link href="/" @click="closeMobileMenu">
-                        <img src="/images/logo_benkky.png" alt="Benkky" title="Benkky">
-                    </Link>
-                </div>
-                <button class="mobile-menu-close" @click="closeMobileMenu">
-                    <i class="fa-solid fa-times"></i>
-                </button>
-            </div>
-
-            <!-- Contenu scrollable -->
-            <div class="mobile-scrollable-content">
-                <!-- Informations de contact mobile -->
-                <div class="mobile-contact-info">
-                    <div class="mobile-info-item">
-                        <i class="fa-solid fa-clock"></i>
-                        <div>
-                            <strong>{{ $t('navigation.open_hours') }}</strong>
-                            <p>{{ $t('navigation.hours_range') }}</p>
-                        </div>
-                    </div>
-
-                    <div class="mobile-info-item">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <div>
-                            <strong>{{ $t('navigation.address') }}</strong>
-                            <p>684 West College St. Sun City, USA</p>
-                        </div>
-                    </div>
-
-                    <div class="mobile-info-item">
-                        <i class="fa-solid fa-phone"></i>
-                        <div>
-                            <strong>{{ $t('navigation.phone') }}</strong>
-                            <a href="tel:+243979515256">+243 979 515 256</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Navigation mobile -->
-                <nav class="mobile-navigation">
-                    <ul class="mobile-nav-list">
-                        <li>
-                            <Link href="/" @click="closeMobileMenu" class="mobile-nav-link">
-                                <i class="fa-solid fa-home"></i>
-                                {{ $t('navigation.home') }}
-                            </Link>
-                        </li>
-
-                        <li class="mobile-dropdown">
-                            <div class="mobile-nav-link dropdown-toggle" @click="toggleMobileDropdown('pages')">
-                                <i class="fa-solid fa-file"></i>
-                                Pages
-                                <i class="fa-solid fa-chevron-down" :class="{ 'rotated': activeMobileDropdown === 'pages' }"></i>
-                            </div>
-                            <div class="mobile-dropdown-content" v-show="activeMobileDropdown === 'pages'">
-                                <Link href="/about" @click="closeMobileMenu">{{ $t('navigation.about') }}</Link>
-                                <Link href="/faq" @click="closeMobileMenu">FAQ</Link>
-                                <Link href="/team" @click="closeMobileMenu">{{ $t('navigation.team') }}</Link>
-                                <Link href="/pricing" @click="closeMobileMenu">Pricing</Link>
-                            </div>
-                        </li>
-
-                        <li class="mobile-dropdown">
-                            <div class="mobile-nav-link dropdown-toggle" @click="toggleMobileDropdown('services')">
-                                <i class="fa-solid fa-cogs"></i>
-                                Services
-                                <i class="fa-solid fa-chevron-down" :class="{ 'rotated': activeMobileDropdown === 'services' }"></i>
-                            </div>
-                            <div class="mobile-dropdown-content" v-show="activeMobileDropdown === 'services'">
-                                <Link href="/services" @click="closeMobileMenu">Services</Link>
-                                <Link href="/service-details" @click="closeMobileMenu">Services Details</Link>
-                            </div>
-                        </li>
-
-                        <li>
-                            <Link href="/portfolio" @click="closeMobileMenu" class="mobile-nav-link">
-                                <i class="fa-solid fa-briefcase"></i>
-                                Portfolio
-                            </Link>
-                        </li>
-
-                        <li>
-                            <Link href="/news-grid" @click="closeMobileMenu" class="mobile-nav-link">
-                                <i class="fa-solid fa-newspaper"></i>
-                                News
-                            </Link>
-                        </li>
-
-                        <li>
-                            <Link href="/contact" @click="closeMobileMenu" class="mobile-nav-link">
-                                <i class="fa-solid fa-envelope"></i>
-                                {{ $t('navigation.contact') }}
-                            </Link>
-                        </li>
-                    </ul>
-                </nav>
-
-                <!-- Section authentification mobile -->
-                <div class="mobile-auth-section">
-                    <div v-if="isAuthenticated" class="mobile-user-profile">
-                        <div class="mobile-user-info">
-                            <div class="mobile-user-avatar">
-                                <img
-                                    v-if="user?.avatar_url"
-                                    :src="user.avatar_url"
-                                    :alt="user.first_name"
-                                    @error="handleAvatarError"
-                                />
-                                <div v-else class="mobile-avatar-initial">
-                                    {{ getUserInitial }}
-                                </div>
-                            </div>
-                            <div class="mobile-user-details">
-                                <strong>{{ displayName }}</strong>
-                                <span>{{ user?.email }}</span>
-                            </div>
-                        </div>
-
-                        <div class="mobile-user-links">
-                            <Link href="/dashboard" @click="closeMobileMenu" class="mobile-user-link">
-                                <i class="fa-solid fa-gauge"></i>
-                                {{ $t('navigation.dashboard') }}
-                            </Link>
-                            <Link href="/profile" @click="closeMobileMenu" class="mobile-user-link">
-                                <i class="fa-regular fa-user"></i>
-                                {{ $t('navigation.profile') }}
-                            </Link>
-                            <Link href="/settings" @click="closeMobileMenu" class="mobile-user-link">
-                                <i class="fa-solid fa-gear"></i>
-                                {{ $t('navigation.settings') }}
-                            </Link>
-                            <button @click="logoutMobile" class="mobile-logout-btn">
-                                <i class="fa-solid fa-right-from-bracket"></i>
-                                {{ $t('navigation.logout') }}
-                            </button>
-                        </div>
-                    </div>
-
-                    <div v-else class="mobile-auth-buttons">
-                        <Link href="/auth/login" @click="closeMobileMenu" class="mobile-login-btn">
-                            <i class="fa-regular fa-user"></i>
-                            {{ $t('navigation.sign_in') }}
-                        </Link>
-                        <Link href="/auth/register" @click="closeMobileMenu" class="mobile-register-btn">
-                            <i class="fa-solid fa-user-plus"></i>
-                            {{ $t('navigation.sign_up') }}
-                        </Link>
-                    </div>
-                </div>
-
-                <!-- Réseaux sociaux mobile -->
-                <div class="mobile-social-section">
-                    <h4>{{ $t('navigation.follow_us') }}</h4>
-                    <div class="mobile-social-icons">
-                        <a href="#" class="mobile-social-icon">
-                            <i class="fa-brands fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="mobile-social-icon">
-                            <i class="fa-brands fa-instagram"></i>
-                        </a>
-                        <a href="#" class="mobile-social-icon">
-                            <i class="fa-brands fa-x-twitter"></i>
-                        </a>
-                        <a href="#" class="mobile-social-icon">
-                            <i class="fa-brands fa-linkedin-in"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Sélecteur de langue mobile -->
-                <div class="mobile-language-selector">
-                    <div class="mobile-language-current" @click="toggleMobileDropdown('language')">
-                        <i class="fa-solid fa-globe"></i>
-                        <span>{{ $t('navigation.language.current') }}</span>
-                        <i class="fa-solid fa-chevron-down" :class="{ 'rotated': activeMobileDropdown === 'language' }"></i>
-                    </div>
-                    <div class="mobile-language-options" v-show="activeMobileDropdown === 'language'">
-                        <button @click="changeLanguage('fr')" class="mobile-language-option">
-                            <span class="flag">🇫🇷</span> Français
-                        </button>
-                        <button @click="changeLanguage('en')" class="mobile-language-option">
-                            <span class="flag">🇺🇸</span> English
-                        </button>
-                        <button @click="changeLanguage('es')" class="mobile-language-option">
-                            <span class="flag">🇪🇸</span> Español
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- Bouton d'inscription quand non connecté -->
+        <router-link v-else class="fixed-btn-inscription" to="/auth/login">
+          {{ $t('navigation.sign_in') }}
+          | {{ $t('navigation.sign_up') }} <i class="fa-regular fa-angle-right"></i>
+        </router-link>
+      </div>
     </div>
+  </header>
+
+  <!-- Menu principal original -->
+  <header class="main-header header-style-three">
+    <!-- Header Top -->
+    <div class="header-top">
+      <div class="auto-container">
+        <div class="top-left">
+          <ul class="info-list">
+            <li>
+              <span class="fa-regular fa-clock"></span>
+              {{ $t('navigation.open_hours') }}:
+              <span>{{ $t('navigation.hours_range') }}</span>
+            </li>
+          </ul>
+          <ul class="info-list">
+            <!-- Sélecteur de langue -->
+            <li class="language-selector-item">
+              <i class="fa-solid fa-globe"></i>
+              <CompactLanguageDropdown />
+            </li>
+            <li><i class="fa-solid fa-location-dot"></i>{{ $t('navigation.address') }}</li>
+          </ul>
+        </div>
+
+        <div class="top-right">
+          <ul class="top-social-icon">
+            <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main box -->
+    <div class="main-box">
+      <div class="logo-box">
+        <div class="logo">
+          <router-link to="/">
+            <img src="/images/logo_benkky.png" alt="Consultez" title="Consultez">
+          </router-link>
+        </div>
+      </div>
+
+      <!-- Nav Box -->
+      <div class="nav-outer">
+        <nav class="nav main-menu">
+          <ul class="navigation">
+            <li class="dropdown">
+              <router-link to="/">{{ $t('navigation.home') }}</router-link>
+            </li>
+
+            <li class="dropdown">
+              <a href="#">Pages</a>
+              <ul>
+                <li><router-link to="/about">{{ $t('navigation.about') }}</router-link></li>
+                <li><router-link to="/faq">Faq</router-link></li>
+                <li><router-link to="/pricing">Pricing</router-link></li>
+                <li class="dropdown">
+                  <a href="#">{{ $t('navigation.team') }}</a>
+                  <ul>
+                    <li><router-link to="/team">Team List</router-link></li>
+                    <li><router-link to="/team-details">Team Details</router-link></li>
+                  </ul>
+                </li>
+                <li class="dropdown">
+                  <a href="#">Shop</a>
+                  <ul>
+                    <li><router-link to="/shop">Products</router-link></li>
+                    <li><router-link to="/shop-sidebar">Products with Sidebar</router-link></li>
+                    <li><router-link to="/product-details">Product Details</router-link></li>
+                    <li><router-link to="/cart">Cart</router-link></li>
+                    <li><router-link to="/checkout">Checkout</router-link></li>
+                  </ul>
+                </li>
+                <li><router-link to="/testimonials">Testimonials</router-link></li>
+                <li><router-link to="/404">404</router-link></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a href="#">Services</a>
+              <ul>
+                <li><router-link to="/services">Services</router-link></li>
+                <li><router-link to="/service-details">Services Details</router-link></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a href="#">Portfolio</a>
+              <ul>
+                <li><router-link to="/portfolio">Portfolio</router-link></li>
+                <li><router-link to="/portfolio-details">Portfolio Details</router-link></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a href="#">News</a>
+              <ul>
+                <li><router-link to="/news-grid">News Grid</router-link></li>
+                <li><router-link to="/news-details">News Details</router-link></li>
+              </ul>
+            </li>
+
+            <li><router-link to="/contact">Contact</router-link></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="outer-box">
+        <div class="info-box">
+          <div class="call-info">
+            <i class="fa-solid fa-phone ring__animation"></i>
+            <div>
+              <h6 class="title">Phone:</h6>
+              <a href="tel:00190000000">+243 979515256</a>
+            </div>
+          </div>
+
+          <!-- MODIFIÉ ICI AUSSI pour le menu principal -->
+          <div class="separator"></div>
+
+          <div v-if="isAuthenticated" class="user-profile-main">
+            <div class="user-profile-toggle">
+              <div class="user-avatar-main">
+                <img v-if="user?.avatar_url" :src="user.avatar_url" :alt="user.first_name" @error="handleAvatarError" />
+                <div v-else class="avatar-initial">
+                  {{ getUserInitial }}
+                </div>
+              </div>
+              <span class="user-greeting">
+                {{ displayName }}
+              </span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+
+            <div class="user-dropdown-main">
+              <router-link to="/dashboard">
+                <i class="fa-solid fa-gauge"></i>
+                {{ $t('navigation.dashboard') }}
+              </router-link>
+              <router-link to="/wallet">
+                <i class="fa-solid fa-wallet"></i>
+                {{ $t('navigation.wallet') }}
+              </router-link>
+              <router-link to="/cards">
+                <i class="fa-regular fa-credit-card"></i>
+                {{ $t('navigation.cards') }}
+              </router-link>
+              <router-link to="/transactions">
+                <i class="fa-solid fa-exchange-alt"></i>
+                {{ $t('navigation.transactions') }}
+              </router-link>
+              <div class="dropdown-divider"></div>
+              <router-link to="/profile">
+                <i class="fa-regular fa-user"></i>
+                {{ $t('navigation.profile') }}
+              </router-link>
+              <router-link to="/settings">
+                <i class="fa-solid fa-gear"></i>
+                {{ $t('navigation.settings') }}
+              </router-link>
+              <div class="dropdown-divider"></div>
+              <button @click="logout" class="logout-btn-main">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                {{ $t('navigation.logout') }}
+              </button>
+            </div>
+          </div>
+
+          <!-- Bouton d'inscription quand non connecté -->
+          <router-link v-else class="btn-inscription" to="/auth/login">
+            {{ $t('navigation.sign_in') }}
+            | {{ $t('navigation.sign_up') }} <i class="fa-regular fa-angle-right"></i>
+          </router-link>
+        </div>
+
+        <div class="mobile-nav-toggler d-block d-lg-none text-white">
+          <div class="custom-burger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <MobileMenu />
+
+    <!-- Header Search -->
+    <HeaderSearch />
+
+    <!-- Sticky Header -->
+    <StickyHeader />
+  </header>
+
+  <!-- NOUVEAU : Menu Dropdown Mobile -->
+  <div class="mobile-dropdown-menu" :class="{ 'open': isMobileMenuOpen, 'scrolled': isMobileScrolled }">
+    <!-- Overlay pour fermer le menu -->
+    <div class="mobile-menu-overlay" @click="closeMobileMenu"></div>
+
+    <!-- Contenu du menu mobile -->
+    <div class="mobile-menu-content">
+      <!-- Header du menu mobile AVEC FIXED -->
+      <div class="mobile-menu-header fixed-mobile-header">
+        <div class="mobile-logo">
+          <router-link to="/" @click="closeMobileMenu">
+            <img src="/images/logo_benkky.png" alt="Benkky" title="Benkky">
+          </router-link>
+        </div>
+        <button class="mobile-menu-close" @click="closeMobileMenu">
+          <i class="fa-solid fa-times"></i>
+        </button>
+      </div>
+
+      <!-- Contenu scrollable -->
+      <div class="mobile-scrollable-content">
+        <!-- Informations de contact mobile -->
+        <div class="mobile-contact-info">
+          <div class="mobile-info-item">
+            <i class="fa-solid fa-clock"></i>
+            <div>
+              <strong>{{ $t('navigation.open_hours') }}</strong>
+              <p>{{ $t('navigation.hours_range') }}</p>
+            </div>
+          </div>
+
+          <div class="mobile-info-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <div>
+              <strong>{{ $t('navigation.address') }}</strong>
+              <p>684 West College St. Sun City, USA</p>
+            </div>
+          </div>
+
+          <div class="mobile-info-item">
+            <i class="fa-solid fa-phone"></i>
+            <div>
+              <strong>{{ $t('navigation.phone') }}</strong>
+              <a href="tel:+243979515256">+243 979 515 256</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation mobile -->
+        <nav class="mobile-navigation">
+          <ul class="mobile-nav-list">
+            <li>
+              <router-link to="/" @click="closeMobileMenu" class="mobile-nav-link">
+                <i class="fa-solid fa-home"></i>
+                {{ $t('navigation.home') }}
+              </router-link>
+            </li>
+
+            <li class="mobile-dropdown">
+              <div class="mobile-nav-link dropdown-toggle" @click="toggleMobileDropdown('pages')">
+                <i class="fa-solid fa-file"></i>
+                Pages
+                <i class="fa-solid fa-chevron-down" :class="{ 'rotated': activeMobileDropdown === 'pages' }"></i>
+              </div>
+              <div class="mobile-dropdown-content" v-show="activeMobileDropdown === 'pages'">
+                <router-link to="/about" @click="closeMobileMenu">{{ $t('navigation.about') }}</router-link>
+                <router-link to="/faq" @click="closeMobileMenu">FAQ</router-link>
+                <router-link to="/team" @click="closeMobileMenu">{{ $t('navigation.team') }}</router-link>
+                <router-link to="/pricing" @click="closeMobileMenu">Pricing</router-link>
+              </div>
+            </li>
+
+            <li class="mobile-dropdown">
+              <div class="mobile-nav-link dropdown-toggle" @click="toggleMobileDropdown('services')">
+                <i class="fa-solid fa-cogs"></i>
+                Services
+                <i class="fa-solid fa-chevron-down" :class="{ 'rotated': activeMobileDropdown === 'services' }"></i>
+              </div>
+              <div class="mobile-dropdown-content" v-show="activeMobileDropdown === 'services'">
+                <router-link to="/services" @click="closeMobileMenu">Services</router-link>
+                <router-link to="/service-details" @click="closeMobileMenu">Services Details</router-link>
+              </div>
+            </li>
+
+            <li>
+              <router-link to="/portfolio" @click="closeMobileMenu" class="mobile-nav-link">
+                <i class="fa-solid fa-briefcase"></i>
+                Portfolio
+              </router-link>
+            </li>
+
+            <li>
+              <router-link to="/news-grid" @click="closeMobileMenu" class="mobile-nav-link">
+                <i class="fa-solid fa-newspaper"></i>
+                News
+              </router-link>
+            </li>
+
+            <li>
+              <router-link to="/contact" @click="closeMobileMenu" class="mobile-nav-link">
+                <i class="fa-solid fa-envelope"></i>
+                {{ $t('navigation.contact') }}
+              </router-link>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Section authentification mobile -->
+        <div class="mobile-auth-section">
+          <div v-if="isAuthenticated" class="mobile-user-profile">
+            <div class="mobile-user-info">
+              <div class="mobile-user-avatar">
+                <img v-if="user?.avatar_url" :src="user.avatar_url" :alt="user.first_name" @error="handleAvatarError" />
+                <div v-else class="mobile-avatar-initial">
+                  {{ getUserInitial }}
+                </div>
+              </div>
+              <div class="mobile-user-details">
+                <strong>{{ displayName }}</strong>
+                <span>{{ user?.email }}</span>
+              </div>
+            </div>
+
+            <div class="mobile-user-links">
+              <router-link to="/dashboard" @click="closeMobileMenu" class="mobile-user-link">
+                <i class="fa-solid fa-gauge"></i>
+                {{ $t('navigation.dashboard') }}
+              </router-link>
+              <router-link to="/profile" @click="closeMobileMenu" class="mobile-user-link">
+                <i class="fa-regular fa-user"></i>
+                {{ $t('navigation.profile') }}
+              </router-link>
+              <router-link to="/settings" @click="closeMobileMenu" class="mobile-user-link">
+                <i class="fa-solid fa-gear"></i>
+                {{ $t('navigation.settings') }}
+              </router-link>
+              <button @click="logoutMobile" class="mobile-logout-btn">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                {{ $t('navigation.logout') }}
+              </button>
+            </div>
+          </div>
+
+          <div v-else class="mobile-auth-buttons">
+            <router-link to="/auth/login" @click="closeMobileMenu" class="mobile-login-btn">
+              <i class="fa-regular fa-user"></i>
+              {{ $t('navigation.sign_in') }}
+            </router-link>
+            <router-link to="/auth/register" @click="closeMobileMenu" class="mobile-register-btn">
+              <i class="fa-solid fa-user-plus"></i>
+              {{ $t('navigation.sign_up') }}
+            </router-link>
+          </div>
+        </div>
+
+        <!-- Réseaux sociaux mobile -->
+        <div class="mobile-social-section">
+          <h4>{{ $t('navigation.follow_us') }}</h4>
+          <div class="mobile-social-icons">
+            <a href="#" class="mobile-social-icon">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="#" class="mobile-social-icon">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="#" class="mobile-social-icon">
+              <i class="fa-brands fa-x-twitter"></i>
+            </a>
+            <a href="#" class="mobile-social-icon">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Sélecteur de langue mobile -->
+        <div class="mobile-language-selector">
+          <div class="mobile-language-current" @click="toggleMobileDropdown('language')">
+            <i class="fa-solid fa-globe"></i>
+            <span>{{ $t('navigation.language.current') }}</span>
+            <i class="fa-solid fa-chevron-down" :class="{ 'rotated': activeMobileDropdown === 'language' }"></i>
+          </div>
+          <div class="mobile-language-options" v-show="activeMobileDropdown === 'language'">
+            <button @click="changeLanguage('fr')" class="mobile-language-option">
+              <span class="flag">🇫🇷</span> Français
+            </button>
+            <button @click="changeLanguage('en')" class="mobile-language-option">
+              <span class="flag">🇺🇸</span> English
+            </button>
+            <button @click="changeLanguage('es')" class="mobile-language-option">
+              <span class="flag">🇪🇸</span> Español
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useAuthStore } from '@/stores/auth';
-import MobileMenu from '../../components/MobileMenu.vue';
-import HeaderSearch from '../../components/HeaderSearch.vue';
-import StickyHeader from '../../components/StickyHeader.vue';
-import CompactLanguageDropdown from '../../components/CompactLanguageDropdown.vue';
+import MobileMenu from './MobileMenu.vue';
+import HeaderSearch from './HeaderSearch.vue';
+import StickyHeader from './StickyHeader.vue';
+import CompactLanguageDropdown from './CompactLanguageDropdown.vue';
 
 const currentDate = ref('');
 const isScrolled = ref(false);

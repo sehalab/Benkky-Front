@@ -38,7 +38,6 @@
 </template>
 
 <script setup>
-import { Link } from '@inertiajs/vue3';
 import SectionTitle from '../ui/SectionTitle.vue';
 import { ref } from 'vue';
 

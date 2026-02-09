@@ -1,55 +1,47 @@
 <template>
-    <MainLayout>
-        <!-- Banner section -->
-        <BannerSection />
+  <AboutSection />
 
-        <!-- About section -->
-        <AboutSection />
+  <FunfactSection />
 
-        <!-- Funfact section -->
-        <FunfactSection />
+  <ServiceSection />
 
-        <!-- Service section -->
-        <ServiceSection />
+  <!-- Consult section -->
+  <ConsultSection />
 
-        <!-- Consult section -->
-        <ConsultSection />
+  <!-- Objective section -->
+  <ObjectiveSection />
 
-        <!-- Objective section -->
-        <ObjectiveSection />
+  <!-- Brand slider -->
+  <BrandSlider />
 
-        <!-- Brand slider -->
-        <BrandSlider />
+  <!-- Case section -->
+  <CaseSection />
 
-        <!-- Case section -->
-        <CaseSection />
+  <!-- Pricing section -->
+  <PricingSection />
 
-        <!-- Pricing section -->
-        <PricingSection />
+  <!-- Team section -->
+  <TeamSection />
 
-        <!-- Team section -->
-        <TeamSection />
+  <!-- Testimonial section -->
+  <TestimonialSection />
 
-        <!-- Testimonial section -->
-        <TestimonialSection />
-
-        <!-- Blog section -->
-        <BlogSection />
-    </MainLayout>
+  <!-- Blog section -->
+  <BlogSection />
 </template>
 
-<script setup lang="ts">
-import MainLayout from '@/components/layouts/MainLayout.vue';
-import BannerSection from '@/components/sections/BannerSection.vue';
+<script setup>
+
 import AboutSection from '@/components/sections/AboutSection.vue';
-import FunfactSection from '@/components/sections/FunfactSection.vue';
-import ServiceSection from '@/components/sections/ServiceSection.vue';
-import ConsultSection from '@/components/sections/ConsultSection.vue';
-import ObjectiveSection from '@/components/sections/ObjectiveSection.vue';
+import BannerSection from '@/components/sections/BannerSection.vue';
+import BlogSection from '@/components/sections/BlogSection.vue';
 import BrandSlider from '@/components/sections/BrandSlider.vue';
 import CaseSection from '@/components/sections/CaseSection.vue';
+import ConsultSection from '@/components/sections/ConsultSection.vue';
+import FunfactSection from '@/components/sections/FunfactSection.vue';
+import ObjectiveSection from '@/components/sections/ObjectiveSection.vue';
 import PricingSection from '@/components/sections/PricingSection.vue';
+import ServiceSection from '@/components/sections/ServiceSection.vue';
 import TeamSection from '@/components/sections/TeamSection.vue';
 import TestimonialSection from '@/components/sections/TestimonialSection.vue';
-import BlogSection from '@/components/sections/BlogSection.vue';
 </script>
