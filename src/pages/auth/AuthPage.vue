@@ -66,7 +66,7 @@
               </span>
               <span class="title-badge">
                 <i class="fa-solid fa-bolt"></i>
-                {{ $t('premium') }}
+
               </span>
             </h2>
             <p class="forms-subtitle">
@@ -77,14 +77,22 @@
 
           <div class="premium-tabs" :class="isDarkTheme ? 'dark-tabs' : 'light-tabs'">
             <div class="tabs-wrapper">
-              <button :class="{ active: activeTab === 'login' }" @click="activeTab = 'login'" class="premium-tab">
+              <button
+                :class="{ active: activeTab === 'login' }"
+                @click="activeTab = 'login'"
+                class="premium-tab"
+              >
                 <div class="tab-icon">
                   <i class="fa-solid fa-right-to-bracket"></i>
                 </div>
                 <span class="tab-text">{{ $t('auth.login.title') }}</span>
                 <div class="tab-glow"></div>
               </button>
-              <button :class="{ active: activeTab === 'register' }" @click="activeTab = 'register'" class="premium-tab">
+              <button
+                :class="{ active: activeTab === 'register' }"
+                @click="activeTab = 'register'"
+                class="premium-tab"
+              >
                 <div class="tab-icon">
                   <i class="fa-solid fa-user-plus"></i>
                 </div>
@@ -95,8 +103,7 @@
             </div>
           </div>
 
-          <div v-if="flashMessage && flashMessage.success" class="premium-alert success"
-            :class="isDarkTheme ? 'dark-alert' : 'light-alert'">
+          <div v-if="flashMessage && flashMessage.success" class="premium-alert success" :class="isDarkTheme ? 'dark-alert' : 'light-alert'">
             <div class="alert-icon">
               <i class="fa-solid fa-circle-check"></i>
             </div>
@@ -131,8 +138,7 @@
             </button>
           </div>
 
-          <form v-show="activeTab === 'login'" @submit.prevent="submitLogin" class="premium-form"
-            :class="isDarkTheme ? 'dark-form' : 'light-form'">
+          <form v-show="activeTab === 'login'" @submit.prevent="submitLogin" class="premium-form" :class="isDarkTheme ? 'dark-form' : 'light-form'">
             <div class="form-group premium-group">
               <label class="premium-label">
                 <div class="label-icon">
@@ -141,15 +147,21 @@
                 <span class="label-text">{{ $t('auth.form.email') }}</span>
               </label>
               <div class="input-wrapper">
-                <input type="email" v-model="loginForm.email" :placeholder="$t('auth.form.email_placeholder')" required
-                  class="premium-input" :class="[
+                <input
+                  type="email"
+                  v-model="loginForm.email"
+                  :placeholder="$t('auth.form.email_placeholder')"
+                  required
+                  class="premium-input"
+                  :class="[
                     isDarkTheme ? 'dark-input' : 'light-input',
                     { 'input-error': loginErrors.email }
-                  ]" />
+                  ]"
+                />
                 <div class="input-border"></div>
                 <div class="input-glow"></div>
               </div>
-              <div v-if="loginErrors?.email" class="input-error-message">
+              <div v-if="loginErrors.email" class="input-error-message">
                 {{ loginErrors.email[0] }}
               </div>
             </div>
@@ -162,13 +174,18 @@
                 <span class="label-text">{{ $t('auth.form.password') }}</span>
               </label>
               <div class="input-wrapper">
-                <input :type="showLoginPassword ? 'text' : 'password'" v-model="loginForm.password"
-                  :placeholder="$t('auth.form.password_placeholder')" required class="premium-input" :class="[
+                <input
+                  :type="showLoginPassword ? 'text' : 'password'"
+                  v-model="loginForm.password"
+                  :placeholder="$t('auth.form.password_placeholder')"
+                  required
+                  class="premium-input password-input"
+                  :class="[
                     isDarkTheme ? 'dark-input' : 'light-input',
                     { 'input-error': loginErrors.password }
-                  ]" />
-                <button type="button" class="password-toggle premium-toggle"
-                  :class="isDarkTheme ? 'dark-toggle' : 'light-toggle'" @click="showLoginPassword = !showLoginPassword">
+                  ]"
+                />
+                <button type="button" class="password-toggle premium-toggle" :class="isDarkTheme ? 'dark-toggle' : 'light-toggle'" @click="showLoginPassword = !showLoginPassword">
                   <i :class="showLoginPassword ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"></i>
                 </button>
                 <div class="input-border"></div>
@@ -178,22 +195,20 @@
                 {{ loginErrors.password[0] }}
               </div>
             </div>
-
+            <br>
             <div class="form-options premium-options">
               <label class="premium-checkbox" :class="isDarkTheme ? 'dark-checkbox' : 'light-checkbox'">
                 <input type="checkbox" v-model="loginForm.remember">
                 <span class="checkmark"></span>
                 <span class="checkbox-text">{{ $t('auth.login.remember_me') }}</span>
               </label>
-              <router-link to="/forgot-password" class="forgot-link premium-link"
-                :class="isDarkTheme ? 'dark-link' : 'light-link'">
+              <router-link to="/forgot-password" class="forgot-link premium-link" :class="isDarkTheme ? 'dark-link' : 'light-link'">
                 {{ $t('auth.login.forgot_password') }}
                 <i class="fa-solid fa-arrow-right"></i>
               </router-link>
             </div>
 
-            <button type="submit" class="premium-btn primary-btn" :class="isDarkTheme ? 'dark-btn' : 'light-btn'"
-              :disabled="isLoading">
+            <button type="submit" class="premium-btn primary-btn" :class="isDarkTheme ? 'dark-btn' : 'light-btn'" :disabled="isLoading">
               <div class="btn-content">
                 <i class="fa-solid fa-arrow-right-to-bracket"></i>&nbsp;
                 <span v-if="!isLoading">{{ $t('auth.login.button') }}</span>
@@ -205,8 +220,7 @@
             </button>
           </form>
 
-          <form v-show="activeTab === 'register'" @submit.prevent="submitRegister" class="premium-form"
-            :class="isDarkTheme ? 'dark-form' : 'light-form'">
+          <form v-show="activeTab === 'register'" @submit.prevent="submitRegister" class="premium-form" :class="isDarkTheme ? 'dark-form' : 'light-form'">
             <div class="form-group premium-group">
               <label class="premium-label">
                 <div class="label-icon">
@@ -215,11 +229,17 @@
                 <span class="label-text">{{ $t('auth.form.full_name') }}</span>
               </label>
               <div class="input-wrapper">
-                <input type="text" v-model="registerForm.name" :placeholder="$t('auth.form.name_placeholder')" required
-                  class="premium-input" :class="[
+                <input
+                  type="text"
+                  v-model="registerForm.name"
+                  :placeholder="$t('auth.form.name_placeholder')"
+                  required
+                  class="premium-input"
+                  :class="[
                     isDarkTheme ? 'dark-input' : 'light-input',
                     { 'input-error': registerErrors.name }
-                  ]" />
+                  ]"
+                />
                 <div class="input-border"></div>
                 <div class="input-glow"></div>
               </div>
@@ -236,11 +256,17 @@
                 <span class="label-text">{{ $t('auth.form.email') }}</span>
               </label>
               <div class="input-wrapper">
-                <input type="email" v-model="registerForm.email" :placeholder="$t('auth.form.email_placeholder')"
-                  required class="premium-input" :class="[
+                <input
+                  type="email"
+                  v-model="registerForm.email"
+                  :placeholder="$t('auth.form.email_placeholder')"
+                  required
+                  class="premium-input"
+                  :class="[
                     isDarkTheme ? 'dark-input' : 'light-input',
                     { 'input-error': registerErrors.email }
-                  ]" />
+                  ]"
+                />
                 <div class="input-border"></div>
                 <div class="input-glow"></div>
               </div>
@@ -257,11 +283,17 @@
                 <span class="label-text">{{ $t('auth.form.phone') }}</span>
               </label>
               <div class="input-wrapper">
-                <input type="tel" v-model="registerForm.phone" :placeholder="$t('auth.form.phone_placeholder')" required
-                  class="premium-input" :class="[
+                <input
+                  type="tel"
+                  v-model="registerForm.phone"
+                  :placeholder="$t('auth.form.phone_placeholder')"
+                  required
+                  class="premium-input"
+                  :class="[
                     isDarkTheme ? 'dark-input' : 'light-input',
                     { 'input-error': registerErrors.phone }
-                  ]" />
+                  ]"
+                />
                 <div class="input-border"></div>
                 <div class="input-glow"></div>
               </div>
@@ -279,14 +311,18 @@
                   <span class="label-text">{{ $t('auth.form.password') }}</span>
                 </label>
                 <div class="input-wrapper">
-                  <input :type="showRegisterPassword ? 'text' : 'password'" v-model="registerForm.password"
-                    :placeholder="$t('auth.form.password_placeholder')" required class="premium-input" :class="[
+                  <input
+                    :type="showRegisterPassword ? 'text' : 'password'"
+                    v-model="registerForm.password"
+                    :placeholder="$t('auth.form.password_placeholder')"
+                    required
+                    class="premium-input password-input"
+                    :class="[
                       isDarkTheme ? 'dark-input' : 'light-input',
                       { 'input-error': registerErrors.password }
-                    ]" />
-                  <button type="button" class="password-toggle premium-toggle"
-                    :class="isDarkTheme ? 'dark-toggle' : 'light-toggle'"
-                    @click="showRegisterPassword = !showRegisterPassword">
+                    ]"
+                  />
+                  <button type="button" class="password-toggle premium-toggle" :class="isDarkTheme ? 'dark-toggle' : 'light-toggle'" @click="showRegisterPassword = !showRegisterPassword">
                     <i :class="showRegisterPassword ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"></i>
                   </button>
                   <div class="input-border"></div>
@@ -314,14 +350,18 @@
                   <span class="label-text">{{ $t('auth.form.confirm_password') }}</span>
                 </label>
                 <div class="input-wrapper">
-                  <input :type="showConfirmPassword ? 'text' : 'password'" v-model="registerForm.password_confirmation"
-                    :placeholder="$t('auth.form.confirm_password_placeholder')" required class="premium-input" :class="[
+                  <input
+                    :type="showConfirmPassword ? 'text' : 'password'"
+                    v-model="registerForm.password_confirmation"
+                    :placeholder="$t('auth.form.confirm_password_placeholder')"
+                    required
+                    class="premium-input password-input"
+                    :class="[
                       isDarkTheme ? 'dark-input' : 'light-input',
                       { 'input-error': registerErrors.password_confirmation }
-                    ]" />
-                  <button type="button" class="password-toggle premium-toggle"
-                    :class="isDarkTheme ? 'dark-toggle' : 'light-toggle'"
-                    @click="showConfirmPassword = !showConfirmPassword">
+                    ]"
+                  />
+                  <button type="button" class="password-toggle premium-toggle" :class="isDarkTheme ? 'dark-toggle' : 'light-toggle'" @click="showConfirmPassword = !showConfirmPassword">
                     <i :class="showConfirmPassword ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"></i>
                   </button>
                   <div class="input-border"></div>
@@ -332,7 +372,7 @@
                 </div>
               </div>
             </div>
-
+            <br>
             <div class="form-group premium-group">
               <label class="premium-checkbox full-width" :class="isDarkTheme ? 'dark-checkbox' : 'light-checkbox'">
                 <input type="checkbox" v-model="registerForm.terms" required>
@@ -342,10 +382,9 @@
               <div v-if="registerErrors.terms" class="input-error-message">
                 {{ registerErrors.terms[0] }}
               </div>
-            </div>
+            </div><br>
 
-            <button type="submit" class="premium-btn primary-btn register-btn"
-              :class="isDarkTheme ? 'dark-btn' : 'light-btn'" :disabled="isLoading">
+            <button type="submit" class="premium-btn primary-btn register-btn" :class="isDarkTheme ? 'dark-btn' : 'light-btn'" :disabled="isLoading">
               <div class="btn-content">
                 <i class="fa-solid fa-rocket"></i>&nbsp;
                 <span v-if="!isLoading">{{ $t('auth.register.button') }}</span>
@@ -358,8 +397,7 @@
 
             <p class="switch-prompt" :class="isDarkTheme ? 'dark-prompt' : 'light-prompt'">
               {{ $t('auth.register.already_have_account') }}
-              <a to="#" @click="activeTab = 'login'; clearValidationErrors()" class="switch-link"
-                :class="isDarkTheme ? 'dark-switch-link' : 'light-switch-link'">
+              <a href="#" @click.prevent="activeTab = 'login'; clearValidationErrors()" class="switch-link" :class="isDarkTheme ? 'dark-switch-link' : 'light-switch-link'">
                 {{ $t('auth.register.switch_to_login') }}
                 <i class="fa-solid fa-arrow-right"></i>
               </a>
@@ -388,7 +426,6 @@
 </template>
 
 <script setup>
-import MainLayout from '@/layouts/guest/MainLayout.vue';
 import LanguageSwitcher from '@/layouts/guest/LanguageSwitcher.vue';
 import { ref, reactive, computed, onMounted } from 'vue';
 import { useAuthStore } from '@/stores/auth';
@@ -405,7 +442,7 @@ const isDarkTheme = ref(true);
 const validationErrors = ref(null);
 const flashMessage = ref({});
 
-// CORRECTION : Initialiser correctement les formulaires
+// Formulaires
 const loginForm = reactive({
   email: '',
   password: '',
@@ -421,21 +458,10 @@ const registerForm = reactive({
   terms: false,
 });
 
-// CORRECTION : Utiliser une computed property qui gère le cas undefined
+// Computed properties
 const isLoading = computed(() => authStore.getIsLoading || false);
-
-// CORRECTION : S'assurer que les erreurs sont toujours des objets
-const loginErrors = computed(() => {
-  if (!validationErrors.value) return {};
-  if (typeof validationErrors.value === 'string') return {};
-  return validationErrors.value;
-});
-
-const registerErrors = computed(() => {
-  if (!validationErrors.value) return {};
-  if (typeof validationErrors.value === 'string') return {};
-  return validationErrors.value;
-});
+const loginErrors = computed(() => validationErrors.value || {});
+const registerErrors = computed(() => validationErrors.value || {});
 
 const indicatorStyle = computed(() => ({
   transform: activeTab.value === 'login' ? 'translateX(0)' : 'translateX(100%)'
@@ -488,9 +514,7 @@ const toggleTheme = () => {
 
 const clearValidationErrors = () => {
   validationErrors.value = null;
-  if (authStore.clearErrors) {
-    authStore.clearErrors();
-  }
+  authStore.clearErrors?.();
 };
 
 const clearFlashMessage = (type = null) => {
@@ -546,8 +570,11 @@ const submitRegister = async () => {
 
     // Vider le formulaire d'inscription
     Object.keys(registerForm).forEach(key => {
-      registerForm[key] = '';
-      if (key === 'terms') registerForm[key] = false;
+      if (key !== 'terms') {
+        registerForm[key] = '';
+      } else {
+        registerForm[key] = false;
+      }
     });
   } catch (error) {
     console.log('Register error:', error);
@@ -857,7 +884,6 @@ onMounted(() => {
     transform: translate(-50%, -50%) scale(0.8);
     opacity: 0.8;
   }
-
   100% {
     transform: translate(-50%, -50%) scale(1.2);
     opacity: 0;
@@ -1101,21 +1127,21 @@ onMounted(() => {
 }
 
 .title-text {
-  font-size: 2.4rem;
-  font-weight: 700;
-  background-clip: text;
+    font-size: 2.4rem;
+    font-weight: 700;
+    background-clip: text;
 }
 
 .dark-fintech .title-text {
-  background: linear-gradient(135deg, var(--accent-color1) 0%, var(--accent-color3) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+    background: linear-gradient(135deg, var(--accent-color1) 0%, var(--accent-color3) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color:#6BC4A6;
 }
 
 .light-fintech .title-text {
-  background: linear-gradient(135deg, var(--accent-color1) 0%, var(--accent-color3) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+    background: linear-gradient(135deg, var(--accent-color1) 0%, var(--accent-color3) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color:#6BC4A6;
 }
 
 .title-badge {
@@ -1136,7 +1162,7 @@ onMounted(() => {
 }
 
 .light-fintech .title-badge {
-  background: rgba(232, 244, 242, 0.6);
+  background: rgb(18, 76, 65);
   border-color: rgba(42, 140, 130, 0.3);
   color: var(--light-accent-color2);
 }
@@ -1202,11 +1228,15 @@ onMounted(() => {
 }
 
 .light-fintech .premium-tab {
-  color: var(--dark-text-color2);
+  color: #000000; /* Noir pour le texte en mode light */
 }
 
-.premium-tab.active {
-  color: white;
+.dark-fintech .premium-tab.active {
+  color: white; /* Blanc pour le texte actif en mode dark */
+}
+
+.light-fintech .premium-tab.active {
+  color: #000000; /* Noir pour le texte actif en mode light */
 }
 
 .tab-icon {
@@ -1230,11 +1260,11 @@ onMounted(() => {
 }
 
 .dark-fintech .tab-glow {
-  background: linear-gradient(135deg, rgba(106, 196, 166, 0.1) 0%, transparent 100%);
+  background: linear-gradient(135deg, rgba(38, 238, 171, 0.767) 0%, transparent 100%);
 }
 
 .light-fintech .tab-glow {
-  background: linear-gradient(135deg, rgba(42, 140, 130, 0.1) 0%, transparent 100%);
+  background: linear-gradient(135deg, rgba(215, 233, 231, 0.866) 0%, transparent 100%);
 }
 
 .premium-tab.active .tab-glow {
@@ -1261,7 +1291,8 @@ onMounted(() => {
   background: linear-gradient(135deg, var(--light-bg-color3) 0%, var(--light-accent-color2) 100%);
 }
 
-/* Labels pour les 7 points corrigés */
+
+/* Labels */
 .premium-label {
   display: flex;
   align-items: center;
@@ -1277,6 +1308,39 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   font-size: 1.1rem;
+  flex-shrink: 0; /* Empêche l'icône de rétrécir */
+}
+
+.label-text {
+  font-weight: 600;
+  font-size: 1rem;
+  flex-shrink: 0; /* Empêche le texte de rétrécir */
+}
+
+.dark-fintech .label-text {
+  color: var(--light-color1);
+}
+
+.light-fintech .label-text {
+  color: var(--dark-text-color1);
+}
+
+/* Input fields avec l'œil intégré */
+.input-wrapper {
+  position: relative;
+  width: 100%; /* S'assure que le wrapper prend toute la largeur */
+}
+
+.dark-input,
+.light-input {
+  width: 100%;
+  padding: 20px 50px 20px 25px;
+  border: 2px solid;
+  border-radius: 14px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  display: block; /* Assure que l'input est en bloc */
 }
 
 .dark-fintech .label-icon {
@@ -1302,27 +1366,32 @@ onMounted(() => {
   color: var(--dark-text-color1);
 }
 
-/* Input fields */
-.dark-input {
+/* Input fields avec l'œil intégré */
+.input-wrapper {
+  position: relative;
+}
+
+.dark-input,
+.light-input {
   width: 100%;
-  padding: 20px 25px;
-  background: rgba(15, 39, 39, 0.6);
-  border: 2px solid rgba(106, 196, 166, 0.1);
+  padding: 20px 50px 20px 25px;
+  border: 2px solid;
   border-radius: 14px;
   font-size: 1rem;
-  color: var(--light-color1);
   transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.dark-input {
+  background: rgba(15, 39, 39, 0.6);
+  border-color: rgba(106, 196, 166, 0.1);
+  color: var(--light-color1);
 }
 
 .light-input {
-  width: 100%;
-  padding: 20px 25px;
   background: rgba(232, 244, 242, 0.6);
-  border: 2px solid rgba(42, 140, 130, 0.1);
-  border-radius: 14px;
-  font-size: 1rem;
+  border-color: rgba(42, 140, 130, 0.1);
   color: var(--dark-text-color1);
-  transition: all 0.3s ease;
 }
 
 .dark-input:focus,
@@ -1348,6 +1417,41 @@ onMounted(() => {
   color: rgba(6, 50, 50, 0.4);
 }
 
+/* L'œil dans le champ de mot de passe */
+.password-toggle {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 1.1rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.dark-toggle {
+  color: var(--accent-color3);
+  background: rgba(26, 65, 55, 0.3);
+}
+
+.light-toggle {
+  color: var(--light-accent-color2);
+  background: rgba(232, 244, 242, 0.3);
+}
+
+.password-toggle:hover {
+  background: rgba(42, 140, 130, 0.2);
+  transform: translateY(-50%) scale(1.1);
+}
+
 .input-border {
   position: absolute;
   bottom: -2px;
@@ -1366,9 +1470,28 @@ onMounted(() => {
   background: linear-gradient(135deg, var(--light-accent-color1) 0%, var(--light-accent-color3) 100%);
 }
 
-.dark-input:focus+.input-border,
-.light-input:focus+.input-border {
+.dark-input:focus + .input-border,
+.light-input:focus + .input-border {
   transform: scaleX(1);
+}
+
+/* Messages d'erreur */
+.input-error-message {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  padding-left: 10px;
+}
+
+.dark-fintech .input-error-message {
+  color: #ff6b6b;
+}
+
+.light-fintech .input-error-message {
+  color: #e74c3c;
+}
+
+.input-error {
+  border-color: #ff6b6b !important;
 }
 
 /* Checkbox */
@@ -1418,7 +1541,7 @@ onMounted(() => {
   border-color: rgba(42, 140, 130, 0.3);
 }
 
-.premium-checkbox input:checked+.checkmark {
+.premium-checkbox input:checked + .checkmark {
   background: var(--accent-color2);
   border-color: var(--accent-color2);
 }
@@ -1430,14 +1553,14 @@ onMounted(() => {
   left: 8px;
   width: 6px;
   height: 12px;
-  border: solid white;
+  border: solid rgb(16, 215, 172);
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
-.premium-checkbox input:checked+.checkmark::after {
+.premium-checkbox input:checked + .checkmark::after {
   opacity: 1;
 }
 
@@ -1445,6 +1568,8 @@ onMounted(() => {
   flex: 1;
 }
 
+/* Boutons */
+/* Boutons - CORRIGE */
 /* Boutons - CORRIGE */
 .light-btn {
   width: 100%;
@@ -1483,8 +1608,8 @@ onMounted(() => {
 }
 
 .dark-btn {
-  background: linear-gradient(135deg, var(--dark-color4) 0%, var(--accent-color2) 100%);
-  color: white;
+  background: linear-gradient(135deg, rgba(42, 140, 130, 0.651) 0%, transparent 100%);
+  color: rgb(255, 255, 255);
 }
 
 .light-btn {
@@ -1498,8 +1623,24 @@ onMounted(() => {
   box-shadow: 0 10px 30px rgba(42, 140, 130, 0.3);
 }
 
+.dark-btn:disabled,
+.light-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* Form options */
-.premium-options {
+.form-options {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1771,6 +1912,93 @@ onMounted(() => {
   border-color: var(--light-accent-color2);
 }
 
+/* Alerts */
+.premium-alert {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-radius: 14px;
+  margin-bottom: 30px;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.success {
+  border: 1px solid rgba(46, 204, 113, 0.3);
+}
+
+.dark-alert.success {
+  background: rgba(39, 174, 96, 0.1);
+}
+
+.light-alert.success {
+  background: rgba(46, 204, 113, 0.1);
+}
+
+.error {
+  border: 1px solid rgba(231, 76, 60, 0.3);
+}
+
+.dark-alert.error {
+  background: rgba(192, 57, 43, 0.1);
+}
+
+.light-alert.error {
+  background: rgba(231, 76, 60, 0.1);
+}
+
+.alert-icon {
+  margin-right: 15px;
+  font-size: 1.5rem;
+}
+
+.success .alert-icon {
+  color: #2ecc71;
+}
+
+.error .alert-icon {
+  color: #e74c3c;
+}
+
+.alert-content {
+  flex: 1;
+}
+
+.alert-title {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.alert-message {
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.alert-close {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 1.1rem;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.alert-close:hover {
+  opacity: 1;
+}
+
 /* Responsive */
 @media (max-width: 992px) {
   .premium-container {
@@ -1819,7 +2047,6 @@ onMounted(() => {
 }
 
 @media (max-width: 576px) {
-
   .brand-panel,
   .forms-panel {
     padding: 20px;
@@ -1827,6 +2054,16 @@ onMounted(() => {
 
   .forms-title .title-text {
     font-size: 2rem;
+  }
+
+  .premium-alert {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .alert-icon {
+    margin-right: 0;
+    margin-bottom: 10px;
   }
 }
 </style>

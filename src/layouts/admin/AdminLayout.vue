@@ -1,4 +1,4 @@
-<!-- @/layouts/AdminLayout.vue (version simplifiée) -->
+<!-- /src/layouts/admin/AdminLayout.vue -->
 <template>
     <MainLayout>
         <div class="admin-dashboard dark-admin">
@@ -14,12 +14,12 @@
             <!-- Main Container -->
             <div class="admin-container">
                 <!-- Admin Sidebar -->
-                <Sidebar :user="userSafe" />
+                <AdminSidebar :user="userSafe" />
 
                 <!-- Main Content -->
                 <div class="main-content">
                     <!-- Admin Header -->
-                    <Header :user="userSafe" />
+                    <AdminHeader :user="userSafe" />
 
                     <!-- Content Area -->
                     <div class="content-area">
@@ -33,10 +33,9 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import Sidebar from './Sidebar.vue';
-import Header from './Header.vue';
-
+import { computed, ref } from 'vue';
+import AdminSidebar from './AdminSidebar.vue';
+import AdminHeader from './AdminHeader.vue';
 
 const props = defineProps({
     user: {
@@ -45,17 +44,27 @@ const props = defineProps({
     }
 });
 
+// Ajout de stats par défaut
+const defaultStats = ref({
+    users: 1250,
+    userTrend: 12,
+    revenue: 125000,
+    revenueTrend: 8,
+    transactions: 5432,
+    activeSessions: 87
+});
+
 const userSafe = computed(() => {
     if (!props.user) return null;
 
     return {
         id: props.user.id || '',
         name: props.user.name || 'Administrateur',
-        email: props.user.email || '',
+        email: props.user.email || 'admin@benkky.com',
         avatar: props.user.avatar || '/images/avatars/admin-avatar.jpg',
-        role: props.user.role || 'admin',
+        role: props.user.role || 'Super Admin',
         permissions: props.user.permissions || [],
-        is_super_admin: props.user.is_super_admin || false,
+        is_super_admin: props.user.is_super_admin || true,
         is_online: props.user.is_online || true,
         last_login_at: props.user.last_login_at || '',
         created_at: props.user.created_at || ''
@@ -64,7 +73,6 @@ const userSafe = computed(() => {
 </script>
 
 <style scoped>
-/* Garder les mêmes styles que précédemment */
 .admin-dashboard {
     min-height: 100vh;
     background: linear-gradient(135deg, #0f1a2e 0%, #1a2b3e 100%);
@@ -84,8 +92,8 @@ const userSafe = computed(() => {
     width: 100%;
     height: 100%;
     background-image:
-        linear-gradient(rgba(66, 133, 244, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(66, 133, 244, 0.05) 1px, transparent 1px);
+        linear-gradient(rgba(24, 54, 50, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(10, 96, 90, 0.05) 1px, transparent 1px);
     background-size: 40px 40px;
     mask-image: radial-gradient(circle at center, black, transparent 70%);
 }
@@ -148,5 +156,24 @@ const userSafe = computed(() => {
     padding: 30px;
     overflow-y: auto;
     position: relative;
+}
+
+/* Scrollbar styling */
+.content-area::-webkit-scrollbar {
+    width: 8px;
+}
+
+.content-area::-webkit-scrollbar-track {
+    background: rgba(15, 26, 46, 0.5);
+    border-radius: 4px;
+}
+
+.content-area::-webkit-scrollbar-thumb {
+    background: #4285f4;
+    border-radius: 4px;
+}
+
+.content-area::-webkit-scrollbar-thumb:hover {
+    background: #34a853;
 }
 </style>

@@ -17,8 +17,12 @@
     "format": "prettier --write --experimental-cli src/"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.1.0",
+    "@inertiajs/vue3": "^2.3.13",
     "axios": "^1.13.4",
     "bootstrap": "^5.3.8",
+    "bootstrap-icons": "^1.13.1",
+    "feather-icons": "^4.29.2",
     "flatpickr": "^4.6.13",
     "pinia": "^3.0.4",
     "slick-carousel": "^1.8.1",

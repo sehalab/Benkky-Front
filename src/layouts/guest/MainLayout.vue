@@ -15,7 +15,7 @@
     <Footer v-if="!actualHideFooter" />
 
     <!-- Language Switcher -->
-    <LanguageSwitcher v-if="actualShowLanguageSwitcher && !actualHideHeader" />
+    <!-- <LanguageSwitcher v-if="actualShowLanguageSwitcher && !actualHideHeader" /> -->
   </div>
 </template>
 

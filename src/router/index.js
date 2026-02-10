@@ -50,7 +50,7 @@ const routes = [
         component: AuthView,
         props: { mode: 'login' },
         meta: {
-          title: 'Connexion',
+          title: 'Connexion | Inscription',
           guest: true,
           layoutProps: {
             hideHeader: true, // IMPORTANT: true pour cacher

@@ -1,8 +1,12 @@
 <template>
+
+  <!-- Banner section -->
+  <BannerSection />
+ <!-- About section -->
   <AboutSection />
-
+ <!-- Funfact section -->
   <FunfactSection />
-
+ <!-- Service section -->
   <ServiceSection />
 
   <!-- Consult section -->

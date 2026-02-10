@@ -55,10 +55,11 @@ const getLanguageFlag = (locale) => {
 
 .language-btn {
   padding: 6px 12px;
-  border: 1px solid #8cd116;
+  border: 1px solid #16d196;
   background: rgba(112, 148, 92, 0);
   border-radius: 6px;
   cursor: pointer;
+  color:#13a747;
   font-size: 14px;
   transition: all 0.3s ease;
   display: flex;

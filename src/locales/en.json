@@ -7,16 +7,17 @@
     "welcome": "Welcome to Benkky"
   },
   "header": {
-    "open_hours": "Open Hours of City Govt. (Mon - Fri: {start} - {end})",
+    "open_hours": "Open Hours of City Govt (Mon - Fri: {start} - {end})",
     "location": "684 West College St. Sun City, USA",
     "phone": "Phone:",
-    "get_quote": "Get an Quote",
+    "get_quote": "Get a Quote",
     "search": "Search"
   },
   "navigation": {
     "home": "Home",
     "pages": "Pages",
     "about": "About",
+    "about_us": "About Us",
     "sign_in": "Sign In",
     "sign_up": "Sign Up",
     "faq": "FAQ",
@@ -41,7 +42,28 @@
     "news": "News",
     "news_grid": "News Grid",
     "news_details": "News Details",
-    "contact": "Contact"
+    "wallet": "Wallet",
+    "transactions": "Transactions",
+    "cards": "Credit Cards",
+    "hello": "Hello",
+    "setings": "Settings",
+    "settings": "Settings",
+    "profile": "Profile",
+    "logout": "Logout",
+    "dashboard": "Dashboard",
+    "documentation": "Documentation",
+    "api_status": "API Status",
+    "blog": "Blog",
+    "adress": "684 West College St. Sun City, USA",
+    "open_hours": "Open Hours of City Govt",
+    "hours_range": "Mon - Fri: 8.00 am - 6.00 pm",
+    "address": "684 West College St. Sun City, USA",
+    "phone": "Phone",
+    "follow_us": "Follow Us",
+    "contact": "Contact",
+    "language": {
+      "current": "Language"
+    }
   },
   "home": {
     "hero": {
@@ -131,6 +153,7 @@
     "read_more": "Read More",
     "view_all": "View All",
     "get_started": "Get Started",
+    "get_started_free": "Get Started Free",
     "contact_us": "Contact Us",
     "send": "Send",
     "subscribe": "Subscribe",
@@ -161,7 +184,7 @@
     "subscribe": "Subscribe",
     "copyright": "© {year} Benkky Technologies. All rights reserved.",
     "privacy": "Privacy Policy",
-    "terms": "Terms of Service",
+    "terms": "Terms of Use",
     "rights": "Licensed electronic payment service"
   },
   "messages": {
@@ -185,113 +208,98 @@
     "login": {
       "title": "Login",
       "button": "Sign In",
+      "welcome_back": "Welcome Back!",
+      "subtitle": "Access your account to manage your finances",
       "remember_me": "Remember me",
       "forgot_password": "Forgot password?",
-      "with_google": "Google",
-      "with_facebook": "Facebook",
+      "with_google": "Continue with Google",
+      "with_facebook": "Continue with Facebook",
       "no_account": "Don't have an account?",
-      "create_one": "Create one"
+      "create_one": "Create one",
+      "or": "or"
     },
     "register": {
       "title": "Register",
-      "button": "Sign Up",
-      "terms_agreement": "I agree to the <a href='/terms'>Terms of Service</a> and <a href='/privacy'>Privacy Policy</a>",
-      "already_have_account": "Already have an account?",
+      "button": "Get Started",
+      "join_us": "Join Us!",
+      "subtitle": "Create your account in seconds",
+      "terms_agreement": "I agree to the <a href='/terms' class='terms-link'>Terms of Service</a> and the <a href='/privacy' class='terms-link'>Privacy Policy</a>",
+      "already_have_account": "Already a member?",
       "switch_to_login": "Sign In",
       "success": "Registration successful! Welcome to Benkky"
     },
     "form": {
       "full_name": "Full Name",
-      "name_placeholder": "Enter your full name",
+      "name_placeholder": "John Doe",
       "email": "Email Address",
-      "email_placeholder": "enter@your.email",
+      "email_placeholder": "Your email address",
       "phone": "Phone",
-      "phone_placeholder": "Your phone number",
+      "phone_placeholder": "+1 234 567 8900",
       "password": "Password",
-      "password_placeholder": "Your password",
+      "password_placeholder": "••••••••",
       "confirm_password": "Confirm Password",
-      "confirm_password_placeholder": "Re-enter your password"
+      "confirm_password_placeholder": "••••••••"
     },
     "validation": {
       "min_length": "8+ characters",
-      "uppercase": "1 uppercase",
+      "uppercase": "1 uppercase letter",
       "number": "1 number",
-      "special": "1 special char"
+      "special": "1 special character"
     },
+    "features": {
+      "security": "Bank-grade Security",
+      "security_desc": "256-bit encryption and two-factor authentication",
+      "speed": "Instant Transactions",
+      "speed_desc": "Real-time transfers and payments",
+      "global": "Global Service",
+      "global_desc": "Available in 50+ countries",
+      "support": {
+        "title": "24/7 Support",
+        "desc": "Dedicated assistance available anytime"
+      }
+    },
+    "testimonial": {
+      "quote": "Benkky revolutionized how we manage our company finances.",
+      "name": "Alexandre Martin",
+      "position": "CEO, FinanceCorp"
+    },
+    "security_note": "Your data is securely encrypted",
+    "or": "or",
+    "back_to_home": "Back to Home",
     "loading": "Loading...",
-    "or": "OR",
-    "back_to_home": "Back to home",
     "illustration_title": "Join the Fintech Revolution",
     "illustration_text": "Manage your finances with simplicity and security with Benkky",
     "illustration_alt": "Fintech Illustration"
   },
-
-  "auth": {
-    "login": {
-        "title": "Login",
-        "button": "Sign In",
-        "welcome_back": "Welcome Back!",
-        "subtitle": "Access your account to manage your finances",
-        "remember_me": "Remember me",
-        "forgot_password": "Forgot password?",
-        "with_google": "Continue with Google",
-        "with_facebook": "Continue with Facebook"
-    },
-    "register": {
-        "title": "Register",
-        "button": "Get Started",
-        "join_us": "Join Us!",
-        "subtitle": "Create your account in seconds",
-        "terms_agreement": "I agree to the <a href='/terms' class='terms-link'>Terms of Service</a> and <a href='/privacy' class='terms-link'>Privacy Policy</a>",
-        "already_have_account": "Already a member?",
-        "switch_to_login": "Sign In"
-    },
-    "form": {
-        "full_name": "Full Name",
-        "name_placeholder": "John Doe",
-        "email": "Email Address",
-        "email_placeholder": "Your email address",
-        "phone": "Phone",
-        "phone_placeholder": "+1 234 567 8900",
-        "password": "Password",
-        "password_placeholder": "••••••••",
-        "confirm_password": "Confirm Password",
-        "confirm_password_placeholder": "••••••••"
-    },
-    "features": {
-        "security": "Bank-grade Security",
-        "security_desc": "256-bit encryption and two-factor authentication",
-        "speed": "Instant Transactions",
-        "speed_desc": "Real-time transfers and payments",
-        "global": "Global Service",
-        "global_desc": "Available in 50+ countries"
-    },
-    "testimonial": {
-        "quote": "Benkky revolutionized how we manage our company finances.",
-        "name": "Alexandre Martin",
-        "position": "CEO, FinanceCorp"
-    },
-    "security_note": "Your data is securely encrypted",
-    "or": "or",
-    "back_to_home": "Back to Home"
-},
-"stats": {
-        "clients": "Clients",
-        "volume": "Volume Processed",
-        "uptime": "Uptime"
-    },
-    "features": {
-
-        "support": {
-            "title": "24/7 Support",
-            "desc": "Dedicated assistance available anytime"
-        }
-    },
-    "premium": "Premium",
-    "success": "Success",
-    "error": "Error",
-    "security": {
-        "title": "Maximum Security",
-        "desc": "ISO 27001 & PCI DSS Certified"
+  "stats": {
+    "clients": "Clients",
+    "volume": "Volume Processed",
+    "uptime": "Uptime"
+  },
+  "features": {
+    "support": {
+      "title": "24/7 Support",
+      "desc": "Dedicated assistance available anytime"
     }
+  },
+  "premium": "Premium",
+  "success": "Success",
+  "error": "Error",
+  "security": {
+    "title": "Maximum Security",
+    "desc": "ISO 27001 & PCI DSS Certified"
+  },
+  "errors": {
+    "page_not_found": "Page Not Found",
+    "page_not_found_description": "The page you are looking for has been moved, deleted, or does not exist. Check the URL or use the options below.",
+    "availability": "Availability",
+    "support": "Support",
+    "return_home": "Return to Home",
+    "contact_support": "Contact Support",
+    "search_placeholder": "Search the site...",
+    "quick_navigation": "Quick Navigation"
+  },
+  "common": {
+    "all_rights_reserved": "All rights reserved"
+  }
 }

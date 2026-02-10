@@ -93,10 +93,35 @@
             </li>
           </ul>
           <ul class="info-list">
-            <!-- Sélecteur de langue -->
+            <!-- Sélecteur de langue MODIFIÉ : Menu déroulant au survol -->
             <li class="language-selector-item">
               <i class="fa-solid fa-globe"></i>
-              <CompactLanguageDropdown />
+              <div class="language-switcher-hover">
+                <span class="current-language">
+                  {{ currentLanguageFlag }} {{ currentLanguageName }}
+                </span>
+                <i class="fa-solid fa-chevron-down ms-1"></i>
+
+                <!-- Menu déroulant au survol - EN PREMIER PLAN -->
+                <div class="language-dropdown-menu">
+                  <button
+                    @click="switchLanguage('fr')"
+                    class="language-option"
+                    :class="{ 'active': currentLocale === 'fr' }"
+                  >
+                    <span class="flag">🇫🇷</span> Français
+                    <i v-if="currentLocale === 'fr'" class="fa-solid fa-check ms-2"></i>
+                  </button>
+                  <button
+                    @click="switchLanguage('en')"
+                    class="language-option"
+                    :class="{ 'active': currentLocale === 'en' }"
+                  >
+                    <span class="flag">🇺🇸</span> English
+                    <i v-if="currentLocale === 'en'" class="fa-solid fa-check ms-2"></i>
+                  </button>
+                </div>
+              </div>
             </li>
             <li><i class="fa-solid fa-location-dot"></i>{{ $t('navigation.address') }}</li>
           </ul>
@@ -454,18 +479,25 @@
         <div class="mobile-language-selector">
           <div class="mobile-language-current" @click="toggleMobileDropdown('language')">
             <i class="fa-solid fa-globe"></i>
-            <span>{{ $t('navigation.language.current') }}</span>
+            <span>{{ currentLanguageName }}</span>
             <i class="fa-solid fa-chevron-down" :class="{ 'rotated': activeMobileDropdown === 'language' }"></i>
           </div>
           <div class="mobile-language-options" v-show="activeMobileDropdown === 'language'">
-            <button @click="changeLanguage('fr')" class="mobile-language-option">
+            <button
+              @click="switchLanguage('fr')"
+              class="mobile-language-option"
+              :class="{ 'active': currentLocale === 'fr' }"
+            >
               <span class="flag">🇫🇷</span> Français
+              <i v-if="currentLocale === 'fr'" class="fa-solid fa-check ms-2"></i>
             </button>
-            <button @click="changeLanguage('en')" class="mobile-language-option">
+            <button
+              @click="switchLanguage('en')"
+              class="mobile-language-option"
+              :class="{ 'active': currentLocale === 'en' }"
+            >
               <span class="flag">🇺🇸</span> English
-            </button>
-            <button @click="changeLanguage('es')" class="mobile-language-option">
-              <span class="flag">🇪🇸</span> Español
+              <i v-if="currentLocale === 'en'" class="fa-solid fa-check ms-2"></i>
             </button>
           </div>
         </div>
@@ -473,13 +505,14 @@
     </div>
   </div>
 </template>
+
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useAuthStore } from '@/stores/auth';
 import MobileMenu from './MobileMenu.vue';
 import HeaderSearch from './HeaderSearch.vue';
 import StickyHeader from './StickyHeader.vue';
-import CompactLanguageDropdown from './CompactLanguageDropdown.vue';
 
 const currentDate = ref('');
 const isScrolled = ref(false);
@@ -488,12 +521,35 @@ const avatarError = ref(false);
 const isMobileMenuOpen = ref(false);
 const activeMobileDropdown = ref(null);
 
+// I18n
+const { locale } = useI18n();
+
 // Store d'authentification
 const authStore = useAuthStore();
 
 // Computed properties
 const user = computed(() => authStore.getUser);
 const isAuthenticated = computed(() => authStore.getIsAuthenticated);
+
+// Langue actuelle
+const currentLocale = computed(() => locale.value);
+
+// Computed properties pour la langue
+const currentLanguageFlag = computed(() => {
+  switch (currentLocale.value) {
+    case 'fr': return '🇫🇷';
+    case 'en': return '🇺🇸';
+    default: return '🌐';
+  }
+});
+
+const currentLanguageName = computed(() => {
+  switch (currentLocale.value) {
+    case 'fr': return 'Français';
+    case 'en': return 'English';
+    default: return 'Language';
+  }
+});
 
 // Nom à afficher
 const displayName = computed(() => {
@@ -549,6 +605,23 @@ const logoutMobile = async () => {
     closeMobileMenu();
   } catch (error) {
     console.error('Logout error:', error);
+  }
+};
+
+// Changement de langue SANS rechargement
+const switchLanguage = (lang) => {
+  // Mettre à jour la locale i18n
+  locale.value = lang;
+
+  // Sauvegarder dans localStorage pour les prochaines visites
+  localStorage.setItem('user-language', lang);
+
+  // Mettre à jour l'attribut lang du document
+  document.documentElement.lang = lang;
+
+  // Fermer le menu mobile si ouvert
+  if (isMobileMenuOpen.value) {
+    closeMobileMenu();
   }
 };
 
@@ -610,12 +683,6 @@ const toggleMobileDropdown = (dropdown) => {
   }
 };
 
-// Changement de langue
-const changeLanguage = (lang) => {
-  router.visit(route('language.switch', { locale: lang }));
-  closeMobileMenu();
-};
-
 onMounted(() => {
   // Date
   const now = new Date();
@@ -628,6 +695,13 @@ onMounted(() => {
   // Initialiser l'auth si nécessaire
   if (isAuthenticated.value && !user.value) {
     authStore.fetchUser().catch(console.error);
+  }
+
+  // Restaurer la langue depuis localStorage
+  const savedLang = localStorage.getItem('user-language');
+  if (savedLang && ['fr', 'en'].includes(savedLang)) {
+    locale.value = savedLang;
+    document.documentElement.lang = savedLang;
   }
 
   // Ajouter le bouton mobile au toggler existant
@@ -1141,6 +1215,138 @@ onUnmounted(() => {
     margin: 0 20px;
 }
 
+/* ==================== */
+/* LANGUAGE SWITCHER AU SURVOL - CORRIGÉ POUR ÊTRE EN PREMIER PLAN */
+/* ==================== */
+.language-switcher-hover {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.language-switcher-hover:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.current-language {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.language-switcher-hover .fa-chevron-down {
+  font-size: 11px;
+  color: #ffffff;
+  opacity: 0.8;
+  transition: transform 0.3s ease;
+}
+
+.language-switcher-hover:hover .fa-chevron-down {
+  transform: rotate(180deg);
+}
+
+/* Menu déroulant simple - EN PREMIER PLAN */
+.language-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+  min-width: 180px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 99999 !important; /* Z-INDEX TRÈS ÉLEVÉ */
+  padding: 8px 0;
+  margin-top: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  overflow: visible !important;
+  pointer-events: auto;
+}
+
+.language-switcher-hover:hover .language-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.language-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 16px;
+  background: none;
+  border: none;
+  text-align: left;
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  justify-content: space-between;
+}
+
+.language-option:hover {
+  background: #f5f5f5;
+  color: #a87f1f;
+}
+
+.language-option.active {
+  background: #f0f9ff;
+  color: #007bff;
+  font-weight: 600;
+}
+
+.language-option.active .flag {
+  color: #007bff;
+}
+
+.language-option .flag {
+  font-size: 18px;
+  width: 24px;
+  display: inline-block;
+  text-align: center;
+}
+
+.language-option .fa-check {
+  font-size: 12px;
+  color: #007bff;
+}
+
+/* IMPORTANT: S'assurer que le parent n'a pas d'overflow hidden */
+.language-selector-item,
+.info-list,
+.top-left {
+  overflow: visible !important;
+}
+
+/* Style pour le menu fixe */
+.fixed-header .language-switcher-hover {
+  padding: 6px 12px;
+}
+
+.fixed-header .current-language {
+  color: #ffffff;
+  font-size: 13px;
+}
+
+.fixed-header .language-dropdown-menu {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+}
+
 /* Responsive pour le menu fixe */
 @media (max-width: 991px) {
     .fixed-header {
@@ -1162,600 +1368,6 @@ onUnmounted(() => {
 
 /* ==================== */
 /* MENU MOBILE DROPDOWN */
-/* ==================== */
-.mobile-dropdown-menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 99999;
-    display: none;
-}
-
-.mobile-dropdown-menu.open {
-    display: block;
-}
-
-.mobile-menu-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(5px);
-}
-
-.mobile-menu-content {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 320px;
-    height: 100%;
-    background: linear-gradient(135deg, #0c401c 0%, #063232 100%);
-    overflow-y: auto;
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
-    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
-}
-
-.mobile-dropdown-menu.open .mobile-menu-content {
-    transform: translateX(0);
-}
-
-.mobile-menu-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.2);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.mobile-logo img {
-    height: 35px;
-    width: auto;
-}
-
-.mobile-menu-close {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
-    padding: 5px;
-    transition: transform 0.3s ease;
-}
-
-.mobile-menu-close:hover {
-    transform: rotate(90deg);
-    color: #a87f1f;
-}
-
-.mobile-contact-info {
-    padding: 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.mobile-info-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 15px;
-    margin-bottom: 15px;
-}
-
-.mobile-info-item:last-child {
-    margin-bottom: 0;
-}
-
-.mobile-info-item i {
-    color: #a87f1f;
-    font-size: 1.2rem;
-    margin-top: 3px;
-    min-width: 20px;
-}
-
-.mobile-info-item div {
-    flex: 1;
-}
-
-.mobile-info-item strong {
-    display: block;
-    color: white;
-    font-size: 0.9rem;
-    margin-bottom: 5px;
-}
-
-.mobile-info-item p,
-.mobile-info-item a {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.85rem;
-    line-height: 1.4;
-    text-decoration: none;
-}
-
-.mobile-info-item a:hover {
-    color: #a87f1f;
-}
-
-.mobile-navigation {
-    padding: 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.mobile-nav-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.mobile-nav-list li {
-    margin-bottom: 5px;
-}
-
-.mobile-nav-link {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 12px 15px;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.05);
-}
-
-.mobile-nav-link:hover {
-    background: rgba(168, 127, 31, 0.2);
-    color: #a87f1f;
-    transform: translateX(5px);
-}
-
-.mobile-nav-link i {
-    width: 20px;
-    text-align: center;
-    font-size: 1.1rem;
-}
-
-.mobile-dropdown {
-    margin-bottom: 5px;
-}
-
-.dropdown-toggle {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-    user-select: none;
-}
-
-.dropdown-toggle i {
-    transition: transform 0.3s ease;
-}
-
-.dropdown-toggle i.rotated {
-    transform: rotate(180deg);
-}
-
-.mobile-dropdown-content {
-    padding-left: 35px;
-    padding-top: 10px;
-}
-
-.mobile-dropdown-content a {
-    display: block;
-    padding: 10px 15px;
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    border-radius: 5px;
-    margin-bottom: 5px;
-    transition: all 0.3s ease;
-    background: rgba(0, 0, 0, 0.1);
-}
-
-.mobile-dropdown-content a:hover {
-    background: rgba(168, 127, 31, 0.2);
-    color: #a87f1f;
-}
-
-.mobile-auth-section {
-    padding: 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.mobile-user-profile {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    overflow: hidden;
-}
-
-.mobile-user-info {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.2);
-}
-
-.mobile-user-avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    overflow: hidden;
-    background: linear-gradient(135deg, #a87f1f 0%, #0c401c 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.mobile-user-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.mobile-avatar-initial {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
-    font-size: 1.2rem;
-}
-
-.mobile-user-details {
-    flex: 1;
-}
-
-.mobile-user-details strong {
-    display: block;
-    color: white;
-    font-size: 1rem;
-    margin-bottom: 5px;
-}
-
-.mobile-user-details span {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.85rem;
-}
-
-.mobile-user-links {
-    padding: 10px;
-}
-
-.mobile-user-link {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 12px 15px;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    margin-bottom: 5px;
-    transition: all 0.3s ease;
-}
-
-.mobile-user-link:hover {
-    background: rgba(168, 127, 31, 0.2);
-    color: #a87f1f;
-}
-
-.mobile-logout-btn {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    width: 100%;
-    padding: 12px 15px;
-    background: rgba(231, 76, 60, 0.1);
-    border: none;
-    color: #e74c3c;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
-    margin-top: 5px;
-}
-
-.mobile-logout-btn:hover {
-    background: rgba(231, 76, 60, 0.2);
-}
-
-.mobile-auth-buttons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
-
-.mobile-login-btn,
-.mobile-register-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 12px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
-}
-
-.mobile-login-btn {
-    background: rgba(168, 127, 31, 0.2);
-    color: #a87f1f;
-    border: 1px solid rgba(168, 127, 31, 0.3);
-}
-
-.mobile-login-btn:hover {
-    background: rgba(168, 127, 31, 0.3);
-    transform: translateY(-2px);
-}
-
-.mobile-register-btn {
-    background: linear-gradient(135deg, #a87f1f 0%, #0c401c 100%);
-    color: white;
-}
-
-.mobile-register-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(168, 127, 31, 0.3);
-}
-
-.mobile-social-section {
-    padding: 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    text-align: center;
-}
-
-.mobile-social-section h4 {
-    color: white;
-    margin-bottom: 15px;
-    font-size: 1.1rem;
-}
-
-.mobile-social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-.mobile-social-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    color: white;
-    font-size: 1.2rem;
-    transition: all 0.3s ease;
-}
-
-.mobile-social-icon:hover {
-    background: #a87f1f;
-    transform: translateY(-3px);
-}
-
-.mobile-language-selector {
-    padding: 20px;
-}
-
-.mobile-language-current {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 12px 15px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
-    color: white;
-    cursor: pointer;
-    user-select: none;
-    transition: all 0.3s ease;
-}
-
-.mobile-language-current:hover {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.mobile-language-current i:first-child {
-    color: #a87f1f;
-}
-
-.mobile-language-current i:last-child {
-    margin-left: auto;
-    transition: transform 0.3s ease;
-}
-
-.mobile-language-current i.rotated {
-    transform: rotate(180deg);
-}
-
-.mobile-language-options {
-    margin-top: 10px;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.mobile-language-option {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    width: 100%;
-    padding: 12px 15px;
-    background: none;
-    border: none;
-    color: white;
-    text-align: left;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.mobile-language-option:hover {
-    background: rgba(168, 127, 31, 0.2);
-}
-
-.mobile-language-option .flag {
-    font-size: 1.2rem;
-}
-
-/* Responsive */
-@media (max-width: 480px) {
-    .mobile-menu-content {
-        width: 280px;
-    }
-
-    .mobile-auth-buttons {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Animation smooth pour le body */
-body {
-    padding-top: 0;
-    transition: padding-top 0.4s ease;
-}
-
-body.has-fixed-header {
-    padding-top: 60px;
-}
-
-body.mobile-menu-open {
-    overflow: hidden;
-}
-
-/* Styles existants restants */
-.language-selector-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.header-top .compact-language-dropdown {
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.header-top .current-flag {
-    font-size: 1.2em;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 2px 5px;
-    border-radius: 3px;
-    transition: background-color 0.3s ease;
-}
-
-.header-top .current-flag:hover {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.header-top {
-    position: relative;
-    z-index: 1000;
-}
-
-.header-top .dropdown-options {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    margin-top: 5px;
-    background: white;
-    border-radius: 6px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 5px;
-    z-index: 1001;
-    min-width: 45px;
-}
-
-.header-top .flag-option {
-    font-size: 1.2em;
-    padding: 6px;
-}
-
-.top-left .info-list {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.language-selector-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    position: relative;
-    z-index: 10000;
-}
-
-.compact-language-dropdown {
-    position: relative !important;
-    z-index: 10000 !important;
-}
-
-.compact-language-dropdown .dropdown-options {
-    position: absolute !important;
-    z-index: 100000 !important;
-}
-
-.custom-burger-icon {
-    width: 24px;
-    height: 18px;
-    position: relative;
-    cursor: pointer;
-}
-
-.custom-burger-icon span {
-    display: block;
-    position: absolute;
-    height: 2px;
-    width: 100%;
-    background: white;
-    border-radius: 2px;
-    opacity: 1;
-    left: 0;
-    transform: rotate(0deg);
-    transition: all 0.25s ease-in-out;
-}
-
-.custom-burger-icon span:nth-child(1) {
-    top: 0px;
-}
-
-.custom-burger-icon span:nth-child(2) {
-    top: 8px;
-}
-
-.custom-burger-icon span:nth-child(3) {
-    top: 16px;
-}
-
-/* Animation hover */
-.custom-burger-icon:hover span {
-    background: #a87f1f;
-}
-
-/* Animation quand le menu est ouvert */
-.mobile-dropdown-menu.open .custom-burger-icon span:nth-child(1) {
-    top: 8px;
-    transform: rotate(45deg);
-}
-
-.mobile-dropdown-menu.open .custom-burger-icon span:nth-child(2) {
-    opacity: 0;
-}
-
-.mobile-dropdown-menu.open .custom-burger-icon span:nth-child(3) {
-    top: 8px;
-    transform: rotate(-45deg);
-}
-
-/* ==================== */
-/* MENU MOBILE DROPDOWN AVEC HEADER FIXE */
 /* ==================== */
 .mobile-dropdown-menu {
     position: fixed;
@@ -2250,14 +1862,30 @@ body.mobile-menu-open {
     text-align: left;
     cursor: pointer;
     transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    justify-content: space-between;
+}
+
+.mobile-language-option:last-child {
+    border-bottom: none;
 }
 
 .mobile-language-option:hover {
     background: rgba(168, 127, 31, 0.2);
 }
 
+.mobile-language-option.active {
+    background: rgba(0, 123, 255, 0.2);
+    color: #4db8ff;
+}
+
 .mobile-language-option .flag {
     font-size: 1.2rem;
+}
+
+.mobile-language-option .fa-check {
+    font-size: 12px;
+    color: #4db8ff;
 }
 
 /* Responsive */
@@ -2269,5 +1897,90 @@ body.mobile-menu-open {
     .mobile-auth-buttons {
         grid-template-columns: 1fr;
     }
+}
+
+/* Animation smooth pour le body */
+body {
+    padding-top: 0;
+    transition: padding-top 0.4s ease;
+}
+
+body.has-fixed-header {
+    padding-top: 60px;
+}
+
+body.mobile-menu-open {
+    overflow: hidden;
+}
+
+/* Styles existants restants */
+.language-selector-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    z-index: 99999 !important;
+    overflow: visible !important;
+}
+
+/* CORRECTION IMPORTANTE: S'assurer que les parents n'ont pas d'overflow caché */
+.header-top,
+.top-left,
+.auto-container,
+.info-list {
+  overflow: visible !important;
+  position: relative;
+}
+
+.custom-burger-icon {
+    width: 24px;
+    height: 18px;
+    position: relative;
+    cursor: pointer;
+}
+
+.custom-burger-icon span {
+    display: block;
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background: white;
+    border-radius: 2px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: all 0.25s ease-in-out;
+}
+
+.custom-burger-icon span:nth-child(1) {
+    top: 0px;
+}
+
+.custom-burger-icon span:nth-child(2) {
+    top: 8px;
+}
+
+.custom-burger-icon span:nth-child(3) {
+    top: 16px;
+}
+
+/* Animation hover */
+.custom-burger-icon:hover span {
+    background: #a87f1f;
+}
+
+/* Animation quand le menu est ouvert */
+.mobile-dropdown-menu.open .custom-burger-icon span:nth-child(1) {
+    top: 8px;
+    transform: rotate(45deg);
+}
+
+.mobile-dropdown-menu.open .custom-burger-icon span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-dropdown-menu.open .custom-burger-icon span:nth-child(3) {
+    top: 8px;
+    transform: rotate(-45deg);
 }
 </style>
