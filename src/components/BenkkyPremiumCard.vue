@@ -418,7 +418,7 @@ onMounted(() => {
     padding: 0 30px 25px;
     position: relative;
     z-index: 2;
-}
+}      
 
 .card-holder,
 .card-expiry {

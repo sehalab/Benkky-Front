@@ -1,96 +1,103 @@
 <template>
-  <DashboardLayout>
-    <!-- Breadcrumb -->
-    <div class="container mt-3">
-      <div class="row gx-1 align-items-center">
-        <div class="col col-sm mb-3 mb-md-0">
-          <nav aria-label="breadcrumb" class="mb-1">
-            <ol class="breadcrumb mb-0">
-              <li class="breadcrumb-item active bi" aria-current="page">
-                <i class="bi bi-house-door"></i> Home
-              </li>
-            </ol>
-          </nav>
-          <h4>Dashboard</h4>
-        </div>
-        <div class="col-auto mb-3 mb-md-0">
-          <div class="input-group width-250">
-            <input type="text" class="form-control bg-none text-center" id="daterangepickerranges">
-            <span class="input-group-text bg-none" id="calendarpickerrange">
-              <i class="bi bi-calendar"></i>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
+  <!-- Utilise le layout AdminLayout de Benkky -->
+  <div class="ecommerce-dashboard">
+    <!-- Inclut le dashboard eCommerce complet -->
+    <div class="dashboard-container">
+      <!-- Header du dashboard eCommerce -->
+      <DashboardHeader
+        @toggle-sidebar="toggleSidebar"
+        @toggle-dark-mode="toggleDarkMode"
+        :user="user"
+      />
 
-    <!-- Main Content -->
-    <div class="container mt-3 mt-lg-4 mt-xl-5" id="main-content">
-      <!-- Welcome Section -->
-      <WelcomeSection :user="user" :stats="welcomeStats" />
+      <!-- Main wrapper -->
+      <div class="adminuiux-wrap">
+        <!-- Sidebar eCommerce -->
+        <DashboardSidebar
+          :is-collapsed="isSidebarCollapsed"
+          :current-route="$route.path"
+        />
 
-      <!-- Summary Cards -->
-      <div class="row gx-3 gx-lg-4">
-        <!-- Summary and Queue Balance -->
-        <div class="col-12 col-md-6 col-xl-4">
-          <SummaryCard />
-        </div>
-
-        <!-- Sales and Revenue -->
-        <div class="col-12 col-md-6 col-xl-8">
-          <div class="row gx-3 gx-lg-4">
-            <!-- Order Summary -->
-            <div class="col-12 col-md-12 col-xl-6">
-              <OrderSummaryCard />
+        <!-- Main content -->
+        <main class="adminuiux-content" :class="{ 'has-sidebar': !isSidebarCollapsed }">
+          <!-- Breadcrumb -->
+          <div class="container mt-3">
+            <div class="row gx-1 align-items-center">
+              <div class="col col-sm mb-3 mb-md-0">
+                <nav aria-label="breadcrumb" class="mb-1">
+                  <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item">
+                      <router-link to="/ecommerce" class="text-decoration-none">
+                        <i class="bi bi-house-door"></i> eCommerce
+                      </router-link>
+                    </li>
+                    <li v-if="$route.meta.breadcrumb" class="breadcrumb-item active">
+                      {{ $route.meta.breadcrumb }}
+                    </li>
+                  </ol>
+                </nav>
+                <h4>{{ pageTitle }}</h4>
+              </div>
             </div>
-
-            <!-- Revenue Generated -->
-            <div class="col-12 col-md-12 col-xl-6">
-              <RevenueCard />
-            </div>
-
-            <!-- Session Metrics -->
-            <SessionMetrics />
           </div>
-        </div>
+
+          <!-- Contenu dynamique -->
+          <router-view v-if="$route.meta.hasNestedView"></router-view>
+
+          <!-- Dashboard par défaut -->
+          <template v-else>
+            <div class="container mt-3 mt-lg-4 mt-xl-5" id="main-content">
+              <WelcomeSection :user="user" :stats="welcomeStats" />
+              <DashboardContent />
+            </div>
+          </template>
+        </main>
       </div>
 
-      <!-- Products Section -->
-      <ProductsSection />
+      <!-- Footer eCommerce -->
+      <DashboardFooter />
 
-      <!-- Product Inventory -->
-      <ProductInventory />
+      <!-- Modals et offcanvas eCommerce -->
+      <SearchModal />
+      <NotificationsOffcanvas />
+      <ProductDetailsOffcanvas />
+      <ThemingOffcanvas />
     </div>
-  </DashboardLayout>
+  </div>
 </template>
 
 <script>
-import DashboardLayout from './DashboardLayout.vue'
+import DashboardHeader from './DashboardHeader.vue'
+import DashboardSidebar from './DashboardSidebar.vue'
+import DashboardFooter from './DashboardFooter.vue'
 import WelcomeSection from './sections/WelcomeSection.vue'
-import SummaryCard from './cards/SummaryCard.vue'
-import OrderSummaryCard from './cards/OrderSummaryCard.vue'
-import RevenueCard from './cards/RevenueCard.vue'
-import SessionMetrics from './sections/SessionMetrics.vue'
-import ProductsSection from './sections/ProductsSection.vue'
-import ProductInventory from './sections/ProductInventory.vue'
+import DashboardContent from './DashboardContent.vue'
+import SearchModal from './modals/SearchModal.vue'
+import NotificationsOffcanvas from './offcanvas/NotificationsOffcanvas.vue'
+import ProductDetailsOffcanvas from './offcanvas/ProductDetailsOffcanvas.vue'
+import ThemingOffcanvas from './offcanvas/ThemingOffcanvas.vue'
 
 export default {
-  name: 'DashboardPage',
+  name: 'ECommerceDashboard',
   components: {
-    DashboardLayout,
+    DashboardHeader,
+    DashboardSidebar,
+    DashboardFooter,
     WelcomeSection,
-    SummaryCard,
-    OrderSummaryCard,
-    RevenueCard,
-    SessionMetrics,
-    ProductsSection,
-    ProductInventory
+    DashboardContent,
+    SearchModal,
+    NotificationsOffcanvas,
+    ProductDetailsOffcanvas,
+    ThemingOffcanvas
   },
   data() {
     return {
+      isSidebarCollapsed: false,
+      isDarkMode: false,
       user: {
         name: 'Adminuiuxer',
-        avatar: '/assets/img/modern-ai-image/user-1.jpg'
+        avatar: '/assets/img/modern-ai-image/user-1.jpg',
+        role: 'Store Owner'
       },
       welcomeStats: {
         orders: 162,
@@ -98,21 +105,32 @@ export default {
       }
     }
   },
-  mounted() {
-    // Initialiser les plugins nécessaires
-    this.initPlugins()
+  computed: {
+    pageTitle() {
+      return this.$route.meta?.title || 'Dashboard eCommerce'
+    }
   },
   methods: {
-    initPlugins() {
-      // Date range picker
-      if (typeof jQuery !== 'undefined' && jQuery().daterangepicker) {
-        $('#daterangepickerranges').daterangepicker({
-          opens: 'left'
-        }, function(start, end, label) {
-          console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'))
-        })
-      }
+    toggleSidebar() {
+      this.isSidebarCollapsed = !this.isSidebarCollapsed
+    },
+    toggleDarkMode() {
+      this.isDarkMode = !this.isDarkMode
+      document.body.classList.toggle('dark-mode', this.isDarkMode)
+    }
+  },
+  mounted() {
+    // Initialiser les icons
+    if (typeof feather !== 'undefined') {
+      feather.replace()
     }
   }
 }
 </script>
+
+<style scoped>
+.ecommerce-dashboard {
+  min-height: 100vh;
+  background-color: var(--adminuiux-bg-color, #f8f9fa);
+}
+</style>
