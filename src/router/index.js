@@ -2,9 +2,12 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import { useAppStore } from '@/stores/app'
 
+
 import MainLayout from '@/layouts/guest/MainLayout.vue'
 import AdminLayout from '@/layouts/admin/AdminLayout.vue'
 import DashboardPage from '@/pages/dashboard/Dashboard.vue'
+
+
 
 const HomeView = () => import('@/pages/Home.vue')
 const NotFoundView = () => import('@/pages/NotFound.vue')
@@ -157,25 +160,6 @@ const routes = [
       },
     ],
   },
-
-  // AJOUT: Dashboard eCommerce (zone protégée)
-{
-  path: '/ecommerce',
-  name: 'ecommerce',
-  component: DashboardPage, // Vous pouvez créer une page dédiée pour l'eCommerce si nécessaire
-  meta: {
-    title: 'Dashboard eCommerce',
-    requiresAuth: false,
-    layoutProps: {
-      hideHeader: true, // On cache le header Benkky
-      hideFooter: true, // On cache le footer Benkky
-      hidePreloader: false,
-    },
-  },
-  children: [
-    // ... routes enfants
-  ],
-},
 
   {
     path: '/:pathMatch(.*)*',

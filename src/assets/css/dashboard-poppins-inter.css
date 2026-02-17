@@ -1,0 +1,184 @@
+/* Dashboard Fonts - Poppins & Inter */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --font-poppins: 'Poppins', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+}
+
+/* ========================================
+   DASHBOARD WRAPPER - MAIN CONTAINER
+   ======================================== */
+.dashboard-wrapper {
+  font-family: var(--font-inter) !important;
+}
+
+/* ========================================
+   ALL HEADINGS
+   ======================================== */
+.dashboard-wrapper h1,
+.dashboard-wrapper h2,
+.dashboard-wrapper h3,
+.dashboard-wrapper h4,
+.dashboard-wrapper h5,
+.dashboard-wrapper h6 {
+  font-family: var(--font-poppins) !important;
+  font-weight: 600 !important;
+}
+
+.dashboard-wrapper h1 {
+  font-weight: 700 !important;
+}
+
+/* ========================================
+   CARD TITLES
+   ======================================== */
+.dashboard-wrapper .card-title,
+.dashboard-wrapper .card h6 {
+  font-family: var(--font-poppins) !important;
+  font-weight: 600 !important;
+}
+
+/* ========================================
+   STATISTICS & NUMBERS
+   ======================================== */
+.dashboard-wrapper [class*="stat"] h3,
+.dashboard-wrapper [class*="stat"] h4,
+.dashboard-wrapper .stat-value {
+  font-family: var(--font-poppins) !important;
+  font-weight: 700 !important;
+}
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+.dashboard-wrapper .btn,
+.dashboard-wrapper button {
+  font-family: var(--font-poppins) !important;
+  font-weight: 500 !important;
+}
+
+/* ========================================
+   TABLES
+   ======================================== */
+.dashboard-wrapper table {
+  font-family: var(--font-inter) !important;
+}
+
+.dashboard-wrapper table thead,
+.dashboard-wrapper table th {
+  font-family: var(--font-poppins) !important;
+  font-weight: 600 !important;
+}
+
+/* ========================================
+   TEXT CONTENT
+   ======================================== */
+.dashboard-wrapper p,
+.dashboard-wrapper .text-body {
+  font-family: var(--font-inter) !important;
+  line-height: 1.6;
+}
+
+.dashboard-wrapper small,
+.dashboard-wrapper .small {
+  font-family: var(--font-inter) !important;
+}
+
+/* ========================================
+   BADGES & LABELS
+   ======================================== */
+.dashboard-wrapper .badge {
+  font-family: var(--font-inter) !important;
+  font-weight: 500 !important;
+}
+
+.dashboard-wrapper label {
+  font-family: var(--font-poppins) !important;
+  font-weight: 500 !important;
+}
+
+/* ========================================
+   NAVIGATION
+   ======================================== */
+.dashboard-wrapper nav,
+.dashboard-wrapper .nav {
+  font-family: var(--font-inter) !important;
+}
+
+.dashboard-wrapper .nav-item {
+  font-family: var(--font-inter) !important;
+}
+
+/* ========================================
+   CARDS
+   ======================================== */
+.dashboard-wrapper .card {
+  font-family: var(--font-inter) !important;
+}
+
+.dashboard-wrapper .card-body {
+  font-family: var(--font-inter) !important;
+}
+
+/* ========================================
+   MODALS
+   ======================================== */
+.dashboard-wrapper .modal-title {
+  font-family: var(--font-poppins) !important;
+  font-weight: 600 !important;
+}
+
+/* ========================================
+   WELCOME SECTION (if exists)
+   ======================================== */
+.dashboard-wrapper .welcome-section h1 {
+  font-family: var(--font-poppins) !important;
+  font-weight: 700 !important;
+}
+
+.dashboard-wrapper .welcome-section p {
+  font-family: var(--font-inter) !important;
+}
+
+/* ========================================
+   ALERTS & MESSAGES
+   ======================================== */
+.dashboard-wrapper .alert {
+  font-family: var(--font-inter) !important;
+}
+
+.dashboard-wrapper .alert-heading {
+  font-family: var(--font-poppins) !important;
+  font-weight: 600 !important;
+}
+
+/* ========================================
+   FORMS
+   ======================================== */
+.dashboard-wrapper .form-label {
+  font-family: var(--font-poppins) !important;
+  font-weight: 500 !important;
+}
+
+.dashboard-wrapper .form-control,
+.dashboard-wrapper .form-select {
+  font-family: var(--font-inter) !important;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 768px) {
+  .dashboard-wrapper {
+    font-size: 14px;
+  }
+
+  .dashboard-wrapper h2 {
+    font-size: 1.5rem;
+  }
+
+  .dashboard-wrapper h3 {
+    font-size: 1.25rem;
+  }
+}

@@ -1,0 +1,99 @@
+/* Dashboard Typography Styles */
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Root Variables */
+:root {
+  --font-poppins: 'Poppins', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+}
+
+/* Dashboard Container */
+.dashboard-wrapper,
+.dashboard-container,
+main.adminuiux-content {
+  font-family: var(--font-inter) !important;
+}
+
+/* Headings in Dashboard */
+.dashboard-wrapper h1,
+.dashboard-wrapper h2,
+.dashboard-wrapper h3,
+.dashboard-wrapper h4,
+.dashboard-wrapper h5,
+.dashboard-wrapper h6,
+main.adminuiux-content h1,
+main.adminuiux-content h2,
+main.adminuiux-content h3,
+main.adminuiux-content h4,
+main.adminuiux-content h5,
+main.adminuiux-content h6 {
+  font-family: var(--font-poppins) !important;
+  font-weight: 600;
+}
+
+/* Card Titles */
+.card h6,
+.card .card-title {
+  font-family: var(--font-poppins) !important;
+  font-weight: 600;
+}
+
+/* Statistics and Numbers */
+.stats-value,
+.stat-number,
+[class*="stat"] h3,
+[class*="stat"] h4 {
+  font-family: var(--font-poppins) !important;
+  font-weight: 700;
+}
+
+/* Dashboard Buttons */
+.dashboard-wrapper button,
+.dashboard-wrapper .btn {
+  font-family: var(--font-poppins) !important;
+  font-weight: 500;
+}
+
+/* Navigation in Dashboard */
+.dashboard-wrapper nav,
+.dashboard-wrapper .nav {
+  font-family: var(--font-inter) !important;
+}
+
+/* Table Headers */
+.dashboard-wrapper thead,
+.dashboard-wrapper .table th {
+  font-family: var(--font-poppins) !important;
+  font-weight: 600;
+}
+
+/* Badge and Labels */
+.dashboard-wrapper .badge,
+.dashboard-wrapper .label {
+  font-family: var(--font-inter) !important;
+  font-weight: 500;
+}
+
+/* Welcome Text */
+.welcome-section h1,
+.welcome-title {
+  font-family: var(--font-poppins) !important;
+  font-weight: 700;
+}
+
+.welcome-section p,
+.welcome-subtitle {
+  font-family: var(--font-inter) !important;
+  font-weight: 400;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard-wrapper h1,
+  .dashboard-wrapper h2,
+  .dashboard-wrapper h3 {
+    font-family: var(--font-poppins) !important;
+  }
+}

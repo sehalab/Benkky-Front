@@ -1,179 +1,51 @@
-<!-- /src/layouts/admin/AdminLayout.vue -->
-<template>
-    <MainLayout>
-        <div class="admin-dashboard dark-admin">
-            <!-- Admin Background -->
-            <div class="admin-background">
-                <div class="bg-shape shape-1"></div>
-                <div class="bg-shape shape-2"></div>
-                <div class="bg-shape shape-3"></div>
-                <div class="bg-shape shape-4"></div>
-                <div class="grid-pattern"></div>
-            </div>
-
-            <!-- Main Container -->
-            <div class="admin-container">
-                <!-- Admin Sidebar -->
-                <AdminSidebar :user="userSafe" />
-
-                <!-- Main Content -->
-                <div class="main-content">
-                    <!-- Admin Header -->
-                    <AdminHeader :user="userSafe" />
-
-                    <!-- Content Area -->
-                    <div class="content-area">
-                        <!-- Router View for Admin Pages -->
-                        <router-view :user="userSafe" />
-                    </div>
-                </div>
-            </div>
-        </div>
-    </MainLayout>
-</template>
-
 <script setup>
-import { computed, ref } from 'vue';
-import AdminSidebar from './AdminSidebar.vue';
-import AdminHeader from './AdminHeader.vue';
+import { ref, onMounted, onUnmounted } from "vue";
+import Sidebar from "@/components/Layouts/sidebar/index.vue";
+import HeaderMain from "@/components/Layouts/header/index.vue";
+import FooterSection from "@/components/Layouts/footer/index.vue";
+import Customizer from '@/components/Customizer/index.vue';
+import WelcomeModal from "@/components/Layouts/WelcomeModal.vue";
+import ScrollToTop from "@/components/Layouts/ScrollToTop.vue";
 
-const props = defineProps({
-    user: {
-        type: Object,
-        default: () => ({})
-    }
+const sidebarOpen = ref(false);
+const windowWidth = ref(window.innerWidth);
+
+const handleResize = () => {
+  windowWidth.value = window.innerWidth;
+};
+
+const toggleNav = () => {
+  sidebarOpen.value = !sidebarOpen.value;
+};
+
+const handleToggleSidebar = () => {
+  sidebarOpen.value = !sidebarOpen.value;
+};
+
+onMounted(() => {
+  window.addEventListener("resize", handleResize);
 });
 
-// Ajout de stats par défaut
-const defaultStats = ref({
-    users: 1250,
-    userTrend: 12,
-    revenue: 125000,
-    revenueTrend: 8,
-    transactions: 5432,
-    activeSessions: 87
-});
-
-const userSafe = computed(() => {
-    if (!props.user) return null;
-
-    return {
-        id: props.user.id || '',
-        name: props.user.name || 'Administrateur',
-        email: props.user.email || 'admin@benkky.com',
-        avatar: props.user.avatar || '/images/avatars/admin-avatar.jpg',
-        role: props.user.role || 'Super Admin',
-        permissions: props.user.permissions || [],
-        is_super_admin: props.user.is_super_admin || true,
-        is_online: props.user.is_online || true,
-        last_login_at: props.user.last_login_at || '',
-        created_at: props.user.created_at || ''
-    };
+onUnmounted(() => {
+  window.removeEventListener("resize", handleResize);
 });
 </script>
 
-<style scoped>
-.admin-dashboard {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #0f1a2e 0%, #1a2b3e 100%);
-    position: relative;
-    overflow: hidden;
-}
+<template>
+  <div class="app-wrapper">
+    <Sidebar
+        v-model:sidebarOpen="sidebarOpen"
+        @toggle-sidebar="handleToggleSidebar"
+    />
 
-.admin-background {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
+    <div class="app-content">
+      <HeaderMain @toggle-nav="toggleNav" />
 
-.grid-pattern {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image:
-        linear-gradient(rgba(24, 54, 50, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(10, 96, 90, 0.05) 1px, transparent 1px);
-    background-size: 40px 40px;
-    mask-image: radial-gradient(circle at center, black, transparent 70%);
-}
-
-.bg-shape {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(60px);
-    opacity: 0.1;
-}
-
-.shape-1 {
-    width: 400px;
-    height: 400px;
-    top: -200px;
-    right: -200px;
-    background: #4285f4;
-}
-
-.shape-2 {
-    width: 300px;
-    height: 300px;
-    bottom: -150px;
-    left: -150px;
-    background: #0f3460;
-}
-
-.shape-3 {
-    width: 250px;
-    height: 250px;
-    top: 20%;
-    left: 10%;
-    background: #34a853;
-}
-
-.shape-4 {
-    width: 200px;
-    height: 200px;
-    bottom: 30%;
-    right: 10%;
-    background: #ea4335;
-}
-
-.admin-container {
-    display: flex;
-    min-height: 100vh;
-    position: relative;
-    z-index: 2;
-}
-
-.main-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-
-.content-area {
-    flex: 1;
-    padding: 30px;
-    overflow-y: auto;
-    position: relative;
-}
-
-/* Scrollbar styling */
-.content-area::-webkit-scrollbar {
-    width: 8px;
-}
-
-.content-area::-webkit-scrollbar-track {
-    background: rgba(15, 26, 46, 0.5);
-    border-radius: 4px;
-}
-
-.content-area::-webkit-scrollbar-thumb {
-    background: #4285f4;
-    border-radius: 4px;
-}
-
-.content-area::-webkit-scrollbar-thumb:hover {
-    background: #34a853;
-}
-</style>
+      <router-view/>
+      <FooterSection />
+      <ScrollToTop />
+      <Customizer />
+      <WelcomeModal />
+    </div>
+  </div>
+</template>

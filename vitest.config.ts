@@ -1,6 +1,7 @@
 import { fileURLToPath } from 'node:url'
 import { mergeConfig, defineConfig, configDefaults } from 'vitest/config'
 import viteConfig from './vite.config'
+import { resolve } from 'path'
 
 export default mergeConfig(
   viteConfig,
@@ -12,3 +13,15 @@ export default mergeConfig(
     },
   }),
 )
+
+export default defineConfig({
+  plugins: [vue()],
+  build: {
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        dashboard: resolve(__dirname, 'dashboard.html'),
+      },
+    },
+  },
+})

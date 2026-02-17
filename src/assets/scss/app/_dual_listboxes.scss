@@ -1,0 +1,63 @@
+
+.dual-listbox {
+  .listbox-section {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+
+    .listbox-group {
+      height: 200px;
+      overflow-y: auto;
+      border: 1px solid rgba(var(--dark), 0.2);
+      border-radius: 0.375rem;
+
+      .listbox-item {
+        cursor: pointer;
+        padding: 8px 12px;
+        border: none;
+        background-color: transparent;
+        border-bottom: 1px solid #efefef;
+        font-size: 0.875rem;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background-color: rgba(var(--primary), 0.1);
+          color: rgba(var(--primary), 1);
+        }
+        &.active {
+          color: rgba(var(--primary), 1);
+        }
+      }
+    }
+  }
+
+  .selected-element {
+    align-items: center;
+  }
+
+  .changed-element {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      word-break: break-word;
+    }
+  }
+}
+
+
+@media (max-width: 576px) {
+  .dual-listbox {
+    .listbox-section {
+      .listbox-group {
+        height: 150px;
+
+        .listbox-item {
+          padding: 6px 10px;
+        }
+      }
+    }
+  }
+}
+
