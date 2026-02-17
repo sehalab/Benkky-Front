@@ -294,11 +294,7 @@ const resetCustomizer = () => {
     <div class="offcanvas-footer p-2 border-top">
       <div class="d-flex gap-2">
         <b-button variant="danger" class="w-100" @click="resetCustomizer">Reset</b-button>
-        <a
-            class="btn btn-success w-100"
-            href="https://themeforest.net/user/la-themes/portfolio"
-            target="_blank"
-        >Buy Now</a>
+        
       </div>
       <div class="d-flex gap-2 mt-2">
         <a class="btn btn-primary w-100" href="mailto:teqlathemes@gmail.com">Support</a>
