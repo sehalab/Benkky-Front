@@ -1,6 +1,9 @@
 <script setup>
 import { BCard, BCardBody, BForm, BFormSelect } from 'bootstrap-vue-next'
 import VueApexCharts from 'vue3-apexcharts'
+import { useI18n } from 'vue-i18n';
+
+const { t, locale } = useI18n();
 
 defineProps({
   chartHeight: {
@@ -73,15 +76,15 @@ const ageData = [
   <b-card no-body>
     <b-card-body>
       <div class="d-flex justify-content-between align-items-center">
-        <h6 class="mb-0 txt-ellipsis-1">Yearly Earning</h6>
+        <h6 class="mb-0 txt-ellipsis-1">{{ t('earning.yearlyEarning') }}</h6>
         <b-form class="ms-2">
           <b-form-select
               aria-label="Default select example"
               class="custom-form-select"
           >
-            <option value="0">Jan</option>
-            <option value="1">Feb</option>
-            <option value="2">Mar</option>
+            <option value="0">{{ t('months.january') }}</option>
+            <option value="1">{{ t('months.february') }}</option>
+            <option value="2">{{ t('months.march') }}</option>
             <option value="3">...</option>
             <option value="4">Dec</option>
           </b-form-select>

@@ -1,5 +1,8 @@
 <script setup>
 import { IconHelp } from '@tabler/icons-vue';
+import { useI18n } from 'vue-i18n';
+
+const { t, locale } = useI18n();
 </script>
 
 <template>
@@ -7,12 +10,11 @@ import { IconHelp } from '@tabler/icons-vue';
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-9 col-12">
-          <p class="footer-text f-w-600 mb-0">Copyright © 2025 ki-admin. All rights reserved 💖
-            V1.0.0</p>
+          <p class="footer-text f-w-600 mb-0">{{ t('footer.copyright', { year: 2026 }) }}</p>
         </div>
         <div class="col-md-3">
           <div class="footer-text text-end">
-            <a class="f-w-500 text-primary" href="mailto:teqlathemes@gmail.com"> Need Help <IconHelp size="20" stroke="1.5" /></a>
+            <a class="f-w-500 text-primary" href="mailto:support@benkky.com"> {{ $t('navigation.need_help') }} <IconHelp size="20" stroke="1.5" /></a>
           </div>
         </div>
       </div>

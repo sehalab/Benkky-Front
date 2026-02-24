@@ -32,7 +32,7 @@ const toggleSidebar = () => {
   <div class="app-logo">
     <!-- Logo -->
     <router-link class="logo d-inline-block" to="/">
-      <b-img alt="Logo" src="/images/logo/1.png"/>
+      <b-img alt="Logo" src="/images/logo_benkky.png"/>
     </router-link>
 
     <span
@@ -52,7 +52,7 @@ const toggleSidebar = () => {
       </span>
 
       <div class="flex-grow-1 ps-2">
-        <h6 class="text-primary mb-0">Ninfa Monaldo</h6>
+        <h6 class="text-primary mb-0">Robert SEHA</h6>
         <p class="text-muted f-s-12 mb-0">Web Developer</p>
       </div>
 

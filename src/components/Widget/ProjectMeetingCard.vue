@@ -1,5 +1,8 @@
 <script setup>
 import {BCard, BCardBody, BButton, BImg} from 'bootstrap-vue-next'
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 </script>
 
 <template>
@@ -31,13 +34,13 @@ import {BCard, BCardBody, BButton, BImg} from 'bootstrap-vue-next'
             />
           </div>
           <div class="flex-grow-1 ps-2 text-start">
-            <div class="fw-medium txt-ellipsis-1">Bette Hagenes</div>
+            <div class="fw-medium txt-ellipsis-1">{{ t('datas.my_data') }}</div>
             <div class="text-muted f-s-12 txt-ellipsis-1">
-              Web Developer
+              {{ t('datas.my_data_description') }}
             </div>
           </div>
           <b-button variant="success" size="sm">
-            Join
+            Voir
           </b-button>
         </div>
       </div>

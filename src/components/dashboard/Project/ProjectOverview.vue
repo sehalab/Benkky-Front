@@ -14,18 +14,18 @@ import ProfitOverviewCard from '@/components/Widget/ProfitOverviewCard.vue'
 const updates = [
   {
     img: '/images/dashboard/ecommerce-dashboard/01.png',
-    text: 'Improve workflow efficiency\n' +
-        'with expert tips & tools!'
+    text: 'Découvrir Plus\n' +
+        'Explorez Nos Services et Solutions Innovantes !'
   },
   {
     img: '/images/dashboard/ecommerce-dashboard/01.png',
-    text: 'Track your budget, earnings,\n' +
-        'and expenses in real time.'
+    text: 'Émettre des Cartes aux Utilisateurs,\n' +
+        'et suivre les dépenses en temps réel.'
   },
   {
     img: '/images/dashboard/ecommerce-dashboard/01.png',
-    text: 'Boost productivity with smart\n' +
-        'project strategies! 🚀'
+    text: 'eSIM pour Voyager\n' +
+        'et gérer vos stratégies de projet ! 🚀'
   }
 ]
 

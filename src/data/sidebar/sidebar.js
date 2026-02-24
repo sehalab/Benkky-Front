@@ -8,8 +8,7 @@ export const MenuList = [
         collapseId: "dashboard",
         path: "/dashboard",
         children: [
-            { name: "Ecommerce", path: "/dashboard/ecommerce" },
-            { name: "Project", path: "/dashboard/project" },
+            
         ],
     },
     {

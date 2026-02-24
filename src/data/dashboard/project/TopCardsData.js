@@ -1,8 +1,11 @@
+// data/dashboard/project/TopCardsData.js
+
+// Vos données existantes pour taskOverviewCards
 export const taskOverviewCards = [
     {
         id: 1,
-        day: "Mon",
-        date: "20",
+        day: "overview.balance",
+        date: "",
         borderColor: "primary",
         bgColor: "primary",
         badgeColor: "primary",
@@ -13,8 +16,8 @@ export const taskOverviewCards = [
     },
     {
         id: 2,
-        day: "Fri",
-        date: "22",
+        day: "DEPOT",
+        date: "",
         borderColor: "success",
         bgColor: "success",
         badgeColor: "success",
@@ -25,8 +28,8 @@ export const taskOverviewCards = [
     },
     {
         id: 3,
-        day: "Wed",
-        date: "25",
+        day: "RETRAIT",
+        date: "",
         borderColor: "danger",
         bgColor: "danger",
         badgeColor: "danger",
@@ -37,6 +40,7 @@ export const taskOverviewCards = [
     },
 ]
 
+// Vos données pour projectTasksLeft
 export const projectTasksLeft = [
     {
         id: 1,
@@ -58,6 +62,7 @@ export const projectTasksLeft = [
     },
 ]
 
+// Vos données pour projectTasksRight
 export const projectTasksRight = [
     {
         id: 4,
@@ -79,6 +84,7 @@ export const projectTasksRight = [
     },
 ]
 
+// Votre fonction taskOverviewOptions
 export const taskOverviewOptions = (color) => ({
     series: [
         {
@@ -126,3 +132,68 @@ export const taskOverviewOptions = (color) => ({
         },
     ],
 })
+
+// NOUVELLES DONNÉES À AJOUTER POUR LE WALLET
+export const walletOverviewCards = [
+    {
+        id: 1,
+        title: "Solde Principal",
+        icon: "fas fa-wallet",
+        borderColor: "primary",
+        bgColor: "primary",
+        textColor: "primary",
+        badgeColor: "primary",
+        amount: "25,430.75",
+        currency: "USD",
+        badgeValue: "ACTIF",
+        lastUpdate: "17 Fév 2026, 14:30",
+        action1: "Voir historique",
+        action1Variant: "outline-primary",
+        action1Icon: "fas fa-history",
+        action2: null
+    },
+    {
+        id: 2,
+        title: "Dernier Rechargement",
+        icon: "fas fa-arrow-up",
+        borderColor: "success",
+        bgColor: "success",
+        textColor: "success",
+        badgeColor: "success",
+        amount: "5,000.00",
+        currency: "USD",
+        badgeValue: "RÉUSSI",
+        transactionDate: "17 Fév 2026",
+        status: "Confirmé",
+        statusColor: "success",
+        statusIcon: "fas fa-check-circle",
+        action1: "Recharger",
+        action1Variant: "success",
+        action1Icon: "fas fa-plus-circle",
+        action2: "Planifier",
+        action2Variant: "outline-success",
+        action2Icon: "far fa-calendar"
+    },
+    {
+        id: 3,
+        title: "Dernier Retrait",
+        icon: "fas fa-arrow-down",
+        borderColor: "warning",
+        bgColor: "warning",
+        textColor: "warning",
+        badgeColor: "warning",
+        amount: "1,250.00",
+        currency: "USD",
+        badgeValue: "EN ATTENTE",
+        transactionDate: "15 Fév 2026",
+        status: "En cours",
+        statusColor: "warning",
+        statusIcon: "fas fa-clock",
+        action1: "Retirer",
+        action1Variant: "warning",
+        action1Icon: "fas fa-minus-circle",
+        action2: "Annuler",
+        action2Variant: "outline-warning",
+        action2Icon: "fas fa-times"
+    }
+]

@@ -46,6 +46,7 @@
     "transactions": "Transactions",
     "cards": "Cartes de crédit",
     "hello": "Bonjour",
+    "need_help": "Voulez-vous une aide",
     "setings": "Paramètres",
     "settings": "Paramètres",
     "profile": "Profil",
@@ -330,6 +331,98 @@
   },
   "common": {
     "all_rights_reserved": "Tous droits réservés"
-  }}
+  },
+  "customizer": {
+    "sidebar_option": "Option de la barre latérale",
+    "light": "Clair",
+    "dark": "Sombre",
+    "semi_dark": "Semi-sombre",
+    "minimal_theme": "Thème minimal",
+    "color_scheme": "Schéma de couleurs",
+    "primary_color": "Couleur primaire",
+    "theme_color": "Couleur du thème",
+    "background_color": "Couleur de fond",
+    "reset": "Réinitialiser"
+  },
+  "earning": {
+    "yearlyEarning": "Revenu annuel",
+    "monthlyEarning": "Revenu mensuel",
+    "weeklyEarning": "Revenu hebdomadaire",
+    "todayEarning": "Revenu aujourd'hui"
+  },
+
+  "datas": {
+    "my_data": "Mes forfaits mobiles",
+    "my_data_description": "Gardez un œil sur votre consommation"
+  },
+  
+  "wallet": {
+    "principal_balance": "Solde Principal",
+    "last_deposit": "Dernier Rechargement",
+    "last_withdrawal": "Dernier Retrait",
+    "active": "ACTIF",
+    "success": "RÉUSSI",
+    "pending": "EN ATTENTE",
+    "confirmed": "Confirmé",
+    "in_progress": "En cours",
+    "view_history": "Voir historique",
+    "recharge": "Recharger",
+    "schedule": "Planifier",
+    "withdraw": "Retirer",
+    "cancel": "Annuler"
+  },
+    "task": {
+    "new_task_assigned": "Nouvelle tâche assignée",
+    "database_migration": "Migration de base de données",
+    "api_development": "Développement API",
+    "ui_ux_update": "Mise à jour UI/UX"
+  },
+  "overview": {
+    "balance": "SOLDE",
+    "deposit": "DÉPÔT",
+    "withdrawal": "RETRAIT"
+  },
+
+  
+  "updates": {
+    "discover_more": "Découvrir Plus",
+    "explore_services": "Explorez Nos Services et Solutions Innovantes !",
+    "issue_cards": "Émettre des Cartes aux Utilisateurs,",
+    "track_expenses": "et suivre les dépenses en temps réel.",
+    "esim_travel": "eSIM pour Voyager",
+    "manage_projects": "et gérer vos stratégies de projet ! 🚀"
+  },
+  
+  "months": {
+    "january": "Janvier",
+    "february": "Février",
+    "march": "Mars",
+    "april": "Avril",
+    "may": "Mai",
+    "june": "Juin",
+    "july": "Juillet",
+    "august": "Août",
+    "september": "Septembre",
+    "october": "Octobre",
+    "november": "Novembre",
+    "december": "Décembre",
+    
+    "short": {
+      "january": "Jan",
+      "february": "Fév",
+      "march": "Mar",
+      "april": "Avr",
+      "may": "Mai",
+      "june": "Juin",
+      "july": "Juil",
+      "august": "Aoû",
+      "september": "Sep",
+      "october": "Oct",
+      "november": "Nov",
+      "december": "Déc"
+    }
+  
+  }
+}
 
 

@@ -171,15 +171,15 @@ const resetCustomizer = () => {
   >
     <!-- Header -->
     <template #header>
-      <h5 class="text-white">Admin Customizer</h5>
-      <p class="text-white opacity-75 w-100">It's time to style according to your choice!</p>
+      <h5 class="text-white">🎨 Personnaliser l'apparence</h5>
+      <p class="text-white opacity-75 w-100">Il est temps de créer un style selon vos préférences !</p>
       <b-button aria-label="Close" class="btn-close" variant="link" type="button" @click="handleClose" />
     </template>
 
     <!-- Body -->
     <div class="flex-grow-1 overflow-auto p-1">
       <div class="app-divider-v secondary py-3">
-        <h6 class="mt-2">Sidebar option</h6>
+        <h6 class="mt-2">Option de la barre latérale</h6>
       </div>
         <ul class="sidebar-option d-flex gap-1">
             <li
@@ -294,13 +294,13 @@ const resetCustomizer = () => {
     <div class="offcanvas-footer p-2 border-top">
       <div class="d-flex gap-2">
         <b-button variant="danger" class="w-100" @click="resetCustomizer">Reset</b-button>
-        
+
       </div>
       <div class="d-flex gap-2 mt-2">
         <a class="btn btn-primary w-100" href="mailto:teqlathemes@gmail.com">Support</a>
         <a
             class="btn btn-dark w-100"
-            href="https://phpstack-1384472-5121645.cloudwaysapps.com/document/vue/ki-admin/index.html"
+            href="#"
         >Document</a>
       </div>
     </div>
