@@ -45,15 +45,12 @@ const isMainActive = computed(() => {
   if (props.links && props.links.length) {
     return props.links.some(link => {
       if (link.path && route.path === link.path) return true;
-
       if (link.children) {
         return link.children.some(child => route.path === child.path);
       }
-
       return false;
     });
   }
-
   return props.path && route.path === props.path;
 });
 
@@ -107,7 +104,7 @@ watch(
       <a
           href="#"
           @click.prevent="toggleCollapse"
-          :aria-expanded="isOpen.toString()"
+          :aria-expanded="isOpen"
           :aria-controls="collapseId"
           role="button"
       >
@@ -121,23 +118,26 @@ watch(
         >
           {{ badgeCount }}
         </span>
+
+        <span class="dropdown-arrow" :class="{ 'open': isOpen }">▶</span>
       </a>
 
-      <ul v-show="isOpen" :id="collapseId" class="collapse show">
+      <ul v-show="isOpen" :id="collapseId" class="collapse-menu">
         <template v-for="(link, index) in links" :key="index">
 
           <li v-if="link.children" class="another-level">
             <a
                 href="#"
                 @click.prevent="toggleSubCollapse(index)"
-                :aria-expanded="subOpen[index].toString()"
+                :aria-expanded="subOpen[index]"
                 :aria-controls="link.collapseId"
                 role="button"
             >
               {{ link.name }}
+              <span class="dropdown-arrow small" :class="{ 'open': subOpen[index] }">▶</span>
             </a>
 
-            <ul v-show="subOpen[index]" :id="link.collapseId" class="collapse show">
+            <ul v-show="subOpen[index]" :id="link.collapseId" class="collapse-submenu">
               <li
                   v-for="(child, uIndex) in link.children"
                   :key="uIndex"
@@ -192,3 +192,113 @@ watch(
     </li>
   </template>
 </template>
+
+<style scoped>
+.dropdown-arrow {
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 12px;
+  transition: transform 0.3s ease;
+}
+
+.dropdown-arrow.open {
+  transform: rotate(90deg);
+}
+
+.dropdown-arrow.small {
+  font-size: 10px;
+  margin-left: 4px;
+}
+
+.collapse-menu,
+.collapse-submenu {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.collapse-submenu {
+  padding-left: 20px;
+}
+
+.another-level > a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* Style pour les liens actifs */
+.router-link-active,
+.active > a {
+  color: #6BC4A6;
+  background-color: rgba(106, 196, 166, 0.1);
+}
+
+/* Ajustements généraux */
+a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  padding: 8px 16px;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  background-color: rgba(106, 196, 166, 0.1);
+  color: #6BC4A6;
+}
+
+.menu-title {
+  padding: 16px 16px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-notification {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+
+
+/* Supprimer les flèches Bootstrap par défaut */
+.dropdown-toggle::after,
+[data-bs-toggle="collapse"]::after,
+.collapse-toggle::after,
+a[aria-expanded]::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Supprimer les pseudo-éléments qui pourraient créer des carrés */
+a[role="button"]::after,
+a[href="#"]::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Supprimer les flèches des menus déroulants */
+.nav-link.dropdown-toggle::after,
+.nav-item.dropdown .dropdown-toggle::after {
+  display: none !important;
+  border: none !important;
+  content: "" !important;
+}
+
+/* Supprimer les flèches des collapse */
+.collapse-toggle::after,
+[data-bs-toggle="collapse"]::after {
+  display: none !important;
+  transform: none !important;
+}
+
+
+
+</style>

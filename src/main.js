@@ -12,6 +12,7 @@ import '@/assets/css/slick.css'
 import '@/assets/css/slick-theme.css'
 import '@/assets/css/style.css'
 import '@/assets/css/style-dark.css'
+import 'phosphor-icons/src/css/icons.css' // Important !
 
 const app = createApp(App)
 const pinia = createPinia()

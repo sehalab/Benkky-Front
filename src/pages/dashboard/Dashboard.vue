@@ -13,13 +13,13 @@ import GlobalMoneyGlobe from '@/components/GlobalMoneyGlobe.vue'
       <ProjectTopCards />
       <ProjectOverview />
       <ProjectOtherCards />
-        <div class="my-page">
-    <GlobalMoneyGlobe
-      :autoRotate="true"
-      :rotationSpeed="0.001"
-      :showControls="false"
-    />
-  </div>
+      <!-- <div class="my-page">
+        <GlobalMoneyGlobe
+          :autoRotate="true"
+          :rotationSpeed="0.001"
+          :showControls="false"
+        />
+      </div> -->
       </b-row>
     </main>
   </AppLayout>

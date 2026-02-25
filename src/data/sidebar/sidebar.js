@@ -9,11 +9,11 @@ export const MenuList = [
         badgeCount: "3",
         collapseId: "dashboard",
         path: "/dashboard",
-        children: [
-            { name: "Vue d'ensemble", path: "/dashboard/overview" },
-            { name: "Activité récente", path: "/dashboard/activity" },
-            { name: "Statistiques", path: "/dashboard/statistics" },
-        ],
+        // children: [
+        //     { name: "Vue d'ensemble", path: "/dashboard/overview" },
+        //     { name: "Activité récente", path: "/dashboard/activity" },
+        //     { name: "Statistiques", path: "/dashboard/statistics" },
+        // ],
     },
 
     // ========== SERVICES FINANCIERS ==========
@@ -236,7 +236,7 @@ export const MenuList = [
     {
         type: "dropdown",
         title: "Ressources",
-        iconClass: "ars-progress", 
+        iconClass: "ars-progress",
         name: "ressources",
         collapseId: "ressources",
         path: "/ressources",
